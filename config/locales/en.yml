@@ -1,0 +1,7 @@
+---
+en:
+  activemodel:
+    attributes:
+      authorization:
+  decidim:
+    donations:
