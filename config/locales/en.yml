@@ -17,3 +17,5 @@ en:
             instructions: In order to be verified you need to contribute with a minimal
               amount.
             title: Make your contribution
+          create:
+            error: There's been an error creating the authorization
