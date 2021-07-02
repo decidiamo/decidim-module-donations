@@ -3,5 +3,17 @@ en:
   activemodel:
     attributes:
       authorization:
+        amount: 'I want to contribute with:'
   decidim:
+    authorization_handlers:
+      donations:
+        explanation: Get verified by making a monetary contribution to the organization
+        name: Donations
     donations:
+      verification:
+        authorizations:
+          new:
+            checkout: Checkout
+            instructions: In order to be verified you need to contribute with a minimal
+              amount.
+            title: Make your contribution
