@@ -9,10 +9,10 @@ def install_module(path)
 
     FileUtils.cp(
       "#{source_path}/initializer.rb",
-      "config/initializers/decidim_verifications_donations.rb"
+      "config/initializers/decidim_donations.rb"
     )
 
-    system("bundle exec rake decidim_donations_verification:install:migrations")
+    system("bundle exec rake decidim_donations:install:migrations")
     system("bundle exec rake db:migrate")
   end
 end

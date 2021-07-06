@@ -19,3 +19,9 @@ en:
             title: Make your contribution
           create:
             error: There's been an error creating the authorization
+            success: Thanks for your donation! You have been succesfully verified!
+      checkout:
+        title: "%{name}'s donation"
+        description: A contribution for %{organization}
+        error: "Payment could not be processed: %{message}"
+        success: Payment processed succesfully!

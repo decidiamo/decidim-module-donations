@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     decidim-donations (0.1)
+      activemerchant
       decidim-admin (~> 0.24.0)
       decidim-core (~> 0.24.0)
       decidim-verifications (~> 0.24.0)
@@ -38,6 +39,11 @@ GEM
     activejob (5.2.6)
       activesupport (= 5.2.6)
       globalid (>= 0.3.6)
+    activemerchant (1.121.0)
+      activesupport (>= 4.2)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (>= 0.6.9)
+      nokogiri (~> 1.4)
     activemodel (5.2.6)
       activesupport (= 5.2.6)
     activerecord (5.2.6)

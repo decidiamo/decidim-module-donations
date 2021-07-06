@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
 
   s.require_paths = ["lib"]
 
+  s.add_dependency "activemerchant"
   s.add_dependency "decidim-admin", Decidim::Donations::DECIDIM_VERSION
   s.add_dependency "decidim-core", Decidim::Donations::DECIDIM_VERSION
   s.add_dependency "decidim-verifications", Decidim::Donations::DECIDIM_VERSION

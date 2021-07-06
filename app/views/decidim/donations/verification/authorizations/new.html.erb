@@ -9,11 +9,9 @@
       </div>
     </div>
 
-    <div class="row authorization-form">
+    <div class="row checkout-form">
       <div class="columns large-4 medium-centered">
         <%= decidim_form_for(@form, url: authorization_path) do |form| %>
-          <%= form.hidden_field :handler_handle %>
-
           <%= form.number_field :amount %>
 
           <div class="actions">
