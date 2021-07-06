@@ -18,7 +18,7 @@ require "decidim/dev/test/base_spec_helper"
 
 RSpec.configure do |config|
   config.before do
-    Decidim::Verifications.register_workflow(:donations_verifications) do |workflow|
+    Decidim::Verifications.register_workflow(:donations) do |workflow|
       workflow.engine = Decidim::Donations::Verification::Engine
       workflow.admin_engine = Decidim::Donations::Verification::AdminEngine
     end

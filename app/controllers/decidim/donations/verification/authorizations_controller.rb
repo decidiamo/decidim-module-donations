@@ -69,7 +69,7 @@ module Decidim
         end
 
         def create_verification(provider)
-          @form = form(AuthorizationForm).from_params({ handler_handle: "donations" }, { provider: provider })
+          @form = form(AuthorizationForm).instance({ provider: provider })
           Decidim::Donations::Verification::ConfirmUserAuthorization.call(authorization, @form, session) do
             on(:ok) do
               flash[:notice] = t("authorizations.create.success", scope: "decidim.donations.verification")

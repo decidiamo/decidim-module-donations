@@ -4,7 +4,7 @@ module Decidim
   module Donations
     module Verification
       class AuthorizationForm < AuthorizationHandler
-        attribute :handler_handle, String
+        attribute :handler_handle, String, default: "donations"
 
         validates :handler_handle,
                   presence: true,

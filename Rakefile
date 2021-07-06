@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "byebug"
 require "decidim/dev/common_rake"
 
 def install_module(path)
@@ -12,7 +11,7 @@ def install_module(path)
       "config/initializers/decidim_donations.rb"
     )
 
-    system("bundle exec rake decidim_donations:install:migrations")
+    system("bundle exec rake decidim_donations_verification:install:migrations")
     system("bundle exec rake db:migrate")
   end
 end
