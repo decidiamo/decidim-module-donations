@@ -25,7 +25,7 @@ module Decidim
       attr_reader :form, :provider, :response
 
       def perform_payment!
-        @response = provider.purchase(order: form.order, extra_params: form.attributes)
+        @response = provider.purchase(order: form.order, params: form.attributes)
       end
 
       def save_payment!

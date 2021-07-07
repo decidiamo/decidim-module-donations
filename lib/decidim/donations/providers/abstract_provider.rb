@@ -13,6 +13,10 @@ module Decidim
         attr_reader :gateway
         attr_accessor :amount, :transaction_id, :order
 
+        def name
+          self.class.name.demodulize.underscore
+        end
+
         def amount_in_cents
           (amount * 100).to_i
         end
@@ -30,6 +34,11 @@ module Decidim
         # assign @amount and @transaction_id and @order hash here
         def purchase(order:, params: {})
           raise NotImplementedError
+        end
+
+        # unique identifier for the last transaction made
+        def transaction_hash
+          "#{name}-#{transaction_id}"
         end
       end
     end

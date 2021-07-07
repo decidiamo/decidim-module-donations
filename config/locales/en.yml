@@ -6,6 +6,11 @@ en:
         amount: 'I want to contribute with:'
   decidim:
     authorization_handlers:
+      admin:
+        donations:
+          help: 
+            - Users have to pay a minimum amount in order to be verified
+            - Currently only PayPal Express is supported (more payment methods in the future)
       donations:
         explanation: Get verified by making a monetary contribution to the organization
         name: Donations

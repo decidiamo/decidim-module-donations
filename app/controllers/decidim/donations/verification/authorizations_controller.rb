@@ -45,7 +45,7 @@ module Decidim
               flash[:notice] = t("checkout.success", scope: "decidim.donations")
 
               Rails.logger.info "Payment successful! #{response.params}"
-              create_verification(provider)
+              create_verification
             end
 
             on(:invalid) do |message|
@@ -59,18 +59,8 @@ module Decidim
 
         private
 
-        def checkout_form
-          form(CheckoutForm).from_params(params,
-                                         ip: request.remote_ip,
-                                         return_url: decidim_donations.checkout_authorization_url,
-                                         cancel_return_url: decidim_donations.checkout_authorization_url,
-                                         title: I18n.t("checkout.title", name: current_user.name, scope: "decidim.donations"),
-                                         description: I18n.t("checkout.description", organization: current_organization.name, scope: "decidim.donations"))
-        end
-
-        def create_verification(provider)
-          @form = form(AuthorizationForm).instance({ provider: provider })
-          Decidim::Donations::Verification::ConfirmUserAuthorization.call(authorization, @form, session) do
+        def create_verification
+          Decidim::Donations::Verification::ConfirmUserAuthorization.call(authorization, authorization_form, session) do
             on(:ok) do
               flash[:notice] = t("authorizations.create.success", scope: "decidim.donations.verification")
               redirect_to decidim_verifications.authorizations_path
@@ -81,6 +71,22 @@ module Decidim
               redirect_to decidim_donations.new_authorization_path
             end
           end
+        end
+
+        def checkout_form
+          form(CheckoutForm).from_params(params,
+                                         ip: request.remote_ip,
+                                         return_url: decidim_donations.checkout_authorization_url,
+                                         cancel_return_url: decidim_donations.checkout_authorization_url,
+                                         title: I18n.t("checkout.title", name: current_user.name, scope: "decidim.donations"),
+                                         description: I18n.t("checkout.description", organization: current_organization.name, scope: "decidim.donations"))
+        end
+
+        def authorization_form
+          form(AuthorizationForm).from_params(
+            { user: current_user, transaction_id: provider.transaction_hash },
+            { provider: provider }
+          )
         end
 
         def authorization

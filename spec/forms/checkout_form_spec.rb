@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/dev/test/form_to_param_shared_examples"
 
 module Decidim::Donations
   describe CheckoutForm do
