@@ -21,4 +21,4 @@ spec/decidim_dummy_app
 development_app
 
 # byebug history
-.byebug-history
+.byebug_history
