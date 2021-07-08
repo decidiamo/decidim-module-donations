@@ -7,15 +7,15 @@ module Decidim
         def call
           return broadcast(:invalid) unless form.valid?
 
-          amount = form.amount
-
-          # TODO: connecto payment gateweay
-
           authorization.update(metadata: {
-                                 "amount" => amount
-                               })
-
+                                 "amount" => form.context.provider.amount,
+                                 "transaction_id" => form.transaction_id
+                               },
+                               unique_id: form.unique_id)
           authorization.grant!
+
+          # update donation
+          Donation.update(authorization_unique_id: authorization.unique_id)
 
           broadcast(:ok)
         end

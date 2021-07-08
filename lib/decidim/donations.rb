@@ -2,9 +2,12 @@
 
 require_relative "donations/version"
 require_relative "donations/verification"
+require_relative "donations/providers"
 
 module Decidim
   module Donations
+    class PaymentError < StandardError; end
+
     include ActiveSupport::Configurable
 
     config_accessor :minimum_amount do
@@ -13,6 +16,29 @@ module Decidim
 
     config_accessor :default_amount do
       10
+    end
+
+    # :test / :production
+    config_accessor :mode do
+      Rails.env.production? ? :production : :test
+    end
+
+    # Payment currency: ISO 4217
+    # in addition, configure Decidim.current_unit for the symbol used in the UI
+    config_accessor :currency do
+      "EUR"
+    end
+
+    config_accessor :provider do
+      :paypal_express
+    end
+
+    config_accessor :credentials do
+      {
+        # login: Rails.application.secrets.donations[:login],
+        # password: Rails.application.secrets.donations[:password],
+        # signature: Rails.application.secrets.donations[:signature]
+      }
     end
   end
 end
