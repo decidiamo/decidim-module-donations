@@ -19,6 +19,9 @@ en:
           amount: Amount
           transaction_id: Transaction ID
     donations:
+      user_profile:
+        menu:
+          title: My donations
       formated_amount: '%{amount}€'
       terms_and_conditions: |
         <h5>By sending this form you agree with the following Terms and Conditions:</h5>
@@ -26,7 +29,15 @@ en:
         <p>This contribution is a donation and it is not refundable.</p>
       providers:
         paypal_express: PayPal
+
       verification:
+        statuses:
+          none: None
+          valid: Yes, valid
+          expired: Yes, expired
+        user_donations:
+          show:
+            title: My donations
         admin:
           donations:
             name: User
@@ -36,7 +47,10 @@ en:
             method: Method
             amount: Amount
             authorization: Authorization
-            success: Success?
+            success: OK?
+            total_donations: Total orders
+            total_donations_successful: Successful payments
+            total_donations_amount: Total amount
             index:
               title: Donations list
         authorizations:
@@ -47,9 +61,9 @@ en:
             checkout: Donate with %{provider}
           create:
             error: There's been an error creating the authorization
-            success: Thanks for your donation! You have been succesfully verified!
+            success: Thanks for your donation! You have been successfully verified!
       checkout:
         title: "%{name}'s donation"
         description: A contribution for %{organization}
         error: "Payment could not be processed: %{message}"
-        success: Payment processed succesfully!
+        success: Payment processed successfully!

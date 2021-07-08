@@ -19,6 +19,14 @@ module Decidim
       def decimal_amount
         amount.to_f / 100
       end
+
+      def authorization_status
+        return :none unless authorization
+
+        return :expired if authorization.expired?
+
+        :valid
+      end
     end
   end
 end
