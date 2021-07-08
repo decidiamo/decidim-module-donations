@@ -8,7 +8,7 @@ module Decidim
         isolate_namespace Decidim::Donations::Verification
 
         routes do
-          resource :authorizations, only: [:new, :create, :edit], as: :authorization do
+          resource :authorizations, only: [:new, :create], as: :authorization do
             get :renew, on: :collection
             get :checkout, on: :collection
           end

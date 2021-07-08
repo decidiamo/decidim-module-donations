@@ -1,19 +1,21 @@
 # Decidim::Donations
 
 [![[CI] Test](https://github.com/decidiamo/decidim-module-donations/actions/workflows/test.yml/badge.svg)](https://github.com/decidiamo/decidim-module-donations/actions/workflows/test.yml)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/8b477f977d011babf92f/maintainability)](https://codeclimate.com/github/decidiamo/decidim-module-donations/maintainability)
-
 [![codecov](https://codecov.io/gh/decidiamo/decidim-module-donations/branch/main/graph/badge.svg)](https://codecov.io/gh/decidiamo/decidim-module-donations)
 
-TODO
+A plugin to allow donations and verify users with them. 
+
+Currently supports PayPal Express Checkout but more payment methods can be easily added (feel free to make contributions in this regard).
+
+![New verification screenshot](examples/new_verification.png)
 
 ## Installation
 
-Add this line to your application's Gemfile:
+As this is still in Beta, add this line to your application's Gemfile for now:
 
 ```ruby
-gem "decidim-donations"
+gem "decidim-donations", git: "https://github.com/decidiamo/decidim-module-donations"
 ```
 
 And then execute:
@@ -23,13 +25,68 @@ bundle
 rails db:migrate
 ```
 
+## Configuration
+
+You need to configure the payment gateway credentials and create an initializer for adding the "Donations" verification method. In the same initializer you can setup the minim and defaults amount required.
+
+For instance, create the file `config/initializers/decidim_donations.rb` with this content:
+
+```ruby
+# frozen_string_literal: true
+
+# Register the verification method in Decidim so organizations can use it (remember to activate it in the /system admin panel)
+Decidim::Verifications.register_workflow(:donations) do |workflow|
+  workflow.engine = Decidim::Donations::Verification::Engine
+  workflow.admin_engine = Decidim::Donations::Verification::AdminEngine
+
+  # Next is optional (defaults to Non-renewable)
+  workflow.expires_in = 1.year
+  workflow.renewable = true
+  workflow.time_between_renewals = 1.month
+end
+
+Decidim::Donations.configure do |config|
+  config.minimum_amount = 1
+  config.default_amount = 5
+
+  config.provider = :paypal_express # currently only this one supported
+  config.credentials = {
+    login: Rails.application.secrets.donations[:login],
+    password: Rails.application.secrets.donations[:password],
+    signature: Rails.application.secrets.donations[:signature]
+  }
+
+  # configure a custom I18n key with an HTML text of your choosing
+  # set it to an empty string to avoid showing any text
+  config.terms_and_conditions = "decidim.donations.terms_and_conditions"
+end
+```
+
+In the configuration above, we use the `config/secrets.yml` (but that's up to you if you want to do the same) configured as follows:
+
+```yaml
+default: &default
+  ...other stuff...
+  donations:
+    login: <%= ENV["PAYPAL_LOGIN"] %>
+    password: <%= ENV["PAYPAL_PASSWORD"] %>
+    signature: <%= ENV["PAYPAL_SIGNATURE"] %>
+
+```
+
+Then just provide the app with the proper ENV vars.
+
+> Note: the example above the gateway configuration is for PayPal Express Checkout. You can test it by creating a Sandbox Account in https://developer.paypal.com/developer/applications/ (Go to "Accounts" => "New account (type Business)" => "... Details" => "API Credentials" )
+> 
+> For real usage, create a NVP/SOAP real PayPal "Business" account.
+
 ## Usage
 
 For enabling the verifcation method:
 
 - Follow the installation instructions above.
 - Login to the system management section of Decidim at `/system`.
-- Enable the newly added verification method.
+- Enable the newly added verification method ("Donations").
 
 TODO
 

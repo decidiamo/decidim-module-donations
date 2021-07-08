@@ -1,7 +1,21 @@
 .decidim-donations {
-  .checkout-form {
-    label[for="authorization_amount"] {
+  .amount {
+    font-weight: 600;
+  }
+  .provider {
+    &.paypal_express {
+      font-style: italic;
       font-weight: bold;
+      font-size: 1.2em;
+    }
+  }
+  .terms-and-conditions {
+    margin-top: 2em;
+  }
+  .checkout-form {
+    label[for="checkout_amount"] {
+      font-weight: 600;
+      font-size: 1.5em;
     }
     #checkout_amount {
       font-size: 3rem;

@@ -13,8 +13,12 @@ module Decidim
         attr_reader :gateway
         attr_accessor :amount, :transaction_id, :order
 
-        def name
+        def manifest_name
           self.class.name.demodulize.underscore
+        end
+
+        def name
+          I18n.t("providers.#{manifest_name}", scope: "decidim.donations")
         end
 
         def amount_in_cents
@@ -38,7 +42,7 @@ module Decidim
 
         # unique identifier for the last transaction made
         def transaction_hash
-          "#{name}-#{transaction_id}"
+          "#{manifest_name}-#{transaction_id}"
         end
       end
     end

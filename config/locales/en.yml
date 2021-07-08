@@ -2,7 +2,7 @@
 en:
   activemodel:
     attributes:
-      authorization:
+      checkout:
         amount: 'I want to contribute with:'
   decidim:
     authorization_handlers:
@@ -14,14 +14,24 @@ en:
       donations:
         explanation: Get verified by making a monetary contribution to the organization
         name: Donations
+        fields:
+          amount: Amount
+          transaction_id: Transaction ID
     donations:
+      formated_amount: '%{amount}€'
+      terms_and_conditions: |
+        <h5>By sending this form you agree with the following Terms and Conditions:</h5>
+
+        <p>This contribution is a donation and it is not refundable.</p>
+      providers:
+        paypal_express: PayPal
       verification:
         authorizations:
           new:
-            checkout: Checkout
-            instructions: In order to be verified you need to contribute with a minimal
-              amount.
+            instructions: In order to complete the authorization process you need to make a donation.
             title: Make your contribution
+            description: A minimum amount of %{minimum_amount} is required in order to complete the authorization. The amount suggested is %{default_amount} but you can change it if you want.
+            checkout: Donate with %{provider}
           create:
             error: There's been an error creating the authorization
             success: Thanks for your donation! You have been succesfully verified!

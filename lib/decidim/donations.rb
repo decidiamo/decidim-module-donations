@@ -18,6 +18,13 @@ module Decidim
       10
     end
 
+    # The text that appears when donating
+    # leave it empty if not necessary
+    # you can also put a (full) I18n key
+    config_accessor :terms_and_conditions do
+      "decidim.donations.terms_and_conditions"
+    end
+
     # :test / :production
     config_accessor :mode do
       Rails.env.production? ? :production : :test
