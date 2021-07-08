@@ -8,7 +8,18 @@ A plugin to allow donations and verify users with them.
 
 Currently supports PayPal Express Checkout but more payment methods can be easily added (feel free to make contributions in this regard).
 
+Verification form:
+
 ![New verification screenshot](examples/new_verification.png)
+
+User profile page:
+
+![User profile screenshot](examples/user.png)
+
+Admin users page:
+
+![Admin users screenshot](examples/admin.png)
+
 
 ## Installation
 
