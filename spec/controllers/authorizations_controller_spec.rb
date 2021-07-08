@@ -20,6 +20,7 @@ module Decidim::Donations::Verification
              amount_in_cents: amount * 100,
              transaction_id: transaction_id,
              gateway: double,
+             method: :paypal_express,
              transaction_hash: "some-hash")
     end
     let(:multistep) { true }
@@ -64,6 +65,36 @@ module Decidim::Donations::Verification
 
         expect(subject).to render_template(:new)
       end
+
+      it "renders terms and conditions" do
+        get :new
+
+        expect(controller.helpers.terms_and_conditions).to include("Terms and Conditions")
+      end
+
+      context "when no terms and conditions" do
+        before do
+          allow(Decidim::Donations).to receive(:terms_and_conditions).and_return(nil)
+        end
+
+        it "renders nothing" do
+          get :new
+
+          expect(controller.helpers.terms_and_conditions).to be_blank
+        end
+      end
+
+      context "when terms and conditions is not a I18n key" do
+        before do
+          allow(Decidim::Donations).to receive(:terms_and_conditions).and_return("Ducky Lucky")
+        end
+
+        it "renders the text" do
+          get :new
+
+          expect(controller.helpers.terms_and_conditions).to eq("Ducky Lucky")
+        end
+      end
     end
 
     context "when creating a new authrorization" do
@@ -93,7 +124,7 @@ module Decidim::Donations::Verification
           post :create, params: params
 
           expect(response).to redirect_to("/authorizations")
-          expect(flash[:notice]).to eq("Thanks for your donation! You have been succesfully verified!")
+          expect(flash[:notice]).to eq("Thanks for your donation! You have been successfully verified!")
         end
       end
     end
@@ -103,7 +134,7 @@ module Decidim::Donations::Verification
         get :checkout, params: params
 
         expect(response).to redirect_to("/authorizations")
-        expect(flash[:notice]).to eq("Thanks for your donation! You have been succesfully verified!")
+        expect(flash[:notice]).to eq("Thanks for your donation! You have been successfully verified!")
       end
 
       context "and purchase goes wrong" do

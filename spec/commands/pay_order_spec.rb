@@ -19,7 +19,8 @@ module Decidim::Donations
     let(:provider) do
       double(
         amount_in_cents: 1200,
-        transaction_id: "some-id"
+        transaction_id: "some-id",
+        method: :paypal_express
       )
     end
     let(:order) do

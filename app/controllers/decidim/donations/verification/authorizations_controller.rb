@@ -105,7 +105,7 @@ module Decidim
         end
 
         def terms_and_conditions
-          @terms_and_conditions ||= I18n.t(Donations.terms_and_conditions, default: nil)
+          @terms_and_conditions ||= I18n.t(Donations.terms_and_conditions, default: Donations.terms_and_conditions)
         end
       end
     end
