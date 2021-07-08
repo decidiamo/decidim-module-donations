@@ -15,7 +15,7 @@ module Decidim
           authorization.grant!
 
           # update donation
-          Donation.update(authorization_unique_id: authorization.unique_id)
+          Donation.find_by(reference: form.context.provider.transaction_id).update(authorization_unique_id: authorization.unique_id)
 
           broadcast(:ok)
         end

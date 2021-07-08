@@ -1,1 +1,42 @@
-index
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+    </h2>
+  </div>
+  <div class="card-section">
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t("name", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th><%= t("email", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th><%= t("method", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th><%= t("reference", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th><%= t("amount", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th><%= t("date", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th><%= t("success", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th><%= t("authorization", scope: "decidim.donations.verification.admin.donations") %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <% console %>
+      <tbody>
+        <% donations.each do |donation| %>
+          <tr>
+            <td><%= donation.user.name %></td>
+            <td><%= donation.user.email %></td>
+            <td><%= donation.provider_class&.provider_name %></td>
+            <td><%= donation.reference %></td>
+            <td><%= amount_to_currency donation.decimal_amount %></td>
+            <td><%= l donation.created_at, format: :decidim_short %></td>
+            <td><%= donation.success? %></td>
+            <td><%= donation.authorization&.unique_id %></td>
+            <td class="table-list__actions">
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate donations, theme: "decidim" %>
+  </div>
+</div>

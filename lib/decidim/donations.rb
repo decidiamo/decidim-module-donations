@@ -47,5 +47,9 @@ module Decidim
         # signature: Rails.application.secrets.donations[:signature]
       }
     end
+
+    def self.find_provider_class(method)
+      "Decidim::Donations::Providers::#{method.camelize}".safe_constantize
+    end
   end
 end

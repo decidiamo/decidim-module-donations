@@ -36,6 +36,7 @@ module Decidim
           description: form.order[:description],
           success: response.success?,
           params: response.params,
+          method: provider.method,
           user: form.current_user
         )
       end

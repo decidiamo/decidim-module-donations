@@ -6,6 +6,16 @@ module Decidim
   module Donations
     module Providers
       class AbstractProvider
+        class << self
+          def manifest_name
+            name.demodulize.underscore
+          end
+
+          def provider_name
+            I18n.t("providers.#{manifest_name}", scope: "decidim.donations")
+          end
+        end
+
         def initialize(login:, password:)
           @gateway = ActiveMerchant::Billing::TrustCommerceGateway(login: login, password: password)
         end
@@ -13,12 +23,12 @@ module Decidim
         attr_reader :gateway
         attr_accessor :amount, :transaction_id, :order
 
-        def manifest_name
-          self.class.name.demodulize.underscore
+        def name
+          self.class.provider_name
         end
 
-        def name
-          I18n.t("providers.#{manifest_name}", scope: "decidim.donations")
+        def method
+          self.class.manifest_name
         end
 
         def amount_in_cents
@@ -42,7 +52,9 @@ module Decidim
 
         # unique identifier for the last transaction made
         def transaction_hash
-          "#{manifest_name}-#{transaction_id}"
+          raise PaymentError unless transaction_id
+
+          "#{method}-#{transaction_id}"
         end
       end
     end

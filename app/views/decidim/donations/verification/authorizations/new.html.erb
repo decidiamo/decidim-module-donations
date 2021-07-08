@@ -16,7 +16,7 @@
           <%= form.number_field :amount %>
 
           <div class="actions">
-            <%= form.submit t(".checkout", provider: "<span class='provider #{provider.manifest_name}'>#{provider.name}</span>").html_safe, class: "button expanded primary large" %>
+            <%= form.submit t(".checkout", provider: "<span class='provider #{provider.method}'>#{provider.name}</span>").html_safe, class: "button expanded primary large" %>
           </div>
         <% end %>
       </div>
