@@ -4,8 +4,9 @@
       <div class="columns large-8 large-centered text-center page-title">
         <h1><%= t(".title") %></h1>
       </div>
-      <div class="columns large-4 medium-centered mb-s text-justify">
-        <%== t(".instructions") %>
+      <div class="columns large-8 medium-centered mb-s text-center">
+        <h4><%= t(".instructions") %></h4>
+        <p><%== t(".description", minimum_amount: minimum_amount, default_amount: default_amount) %></p>
       </div>
     </div>
 
@@ -15,11 +16,19 @@
           <%= form.number_field :amount %>
 
           <div class="actions">
-            <%= form.submit t(".checkout"), class: "button expanded", "data-disable-with" => "#{t('.checkout')}..." %>
+            <%= form.submit t(".checkout", provider: "<span class='provider #{provider.method}'>#{provider.name}</span>").html_safe, class: "button expanded primary large" %>
           </div>
         <% end %>
       </div>
     </div>
+
+    <% if terms_and_conditions %>
+      <div class="terms-and-conditions">
+        <div class="columns large-8 medium-centered mb-s text-center">
+          <%== terms_and_conditions %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

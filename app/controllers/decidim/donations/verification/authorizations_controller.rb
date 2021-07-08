@@ -8,18 +8,18 @@ module Decidim
         include FormFactory
         include PaymentGateway
 
-        helper_method :authorization
-
-        before_action do
-          enforce_permission_to :create, :authorization, authorization: authorization
-        end
+        helper_method :authorization, :minimum_amount, :default_amount, :provider, :terms_and_conditions
 
         def new
+          enforce_permission_to :create, :authorization, authorization: authorization
+
           @form = checkout_form
         end
 
         # preparation step and redirect to gateway
         def create
+          enforce_permission_to :create, :authorization, authorization: authorization
+
           @form = checkout_form
           if provider.multistep?
             response = provider.setup_purchase(order: @form.order, params: @form.attributes)
@@ -39,6 +39,8 @@ module Decidim
 
         # payment
         def checkout
+          enforce_permission_to :create, :authorization, authorization: authorization
+
           @form = checkout_form
           PayOrder.call(@form, provider) do
             on(:ok) do |response|
@@ -54,8 +56,6 @@ module Decidim
             end
           end
         end
-
-        def edit; end
 
         private
 
@@ -94,6 +94,18 @@ module Decidim
             user: current_user,
             name: "donations"
           )
+        end
+
+        def minimum_amount
+          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.minimum_amount, scope: "decidim.donations")}</span>"
+        end
+
+        def default_amount
+          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.default_amount, scope: "decidim.donations")}</span>"
+        end
+
+        def terms_and_conditions
+          @terms_and_conditions ||= I18n.t(Donations.terms_and_conditions, default: Donations.terms_and_conditions)
         end
       end
     end

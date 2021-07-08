@@ -11,6 +11,24 @@ module Decidim
                  primary_key: "unique_id",
                  class_name: "Decidim::Authorization",
                  optional: true
+
+      def provider_class
+        Donations.find_provider_class method
+      end
+
+      def decimal_amount
+        amount.to_f / 100
+      end
+
+      def authorization_status
+        return :none unless authorization
+
+        return :expired if authorization.expired?
+
+        return :valid if authorization.granted?
+
+        :pending
+      end
     end
   end
 end

@@ -21,7 +21,8 @@ module Decidim::Donations::Providers
 
     it "gateway is PaypalExpress" do
       expect(subject.gateway).to be_a(ActiveMerchant::Billing::PaypalExpressGateway)
-      expect(subject.name).to eq("paypal_express")
+      expect(subject.method).to eq("paypal_express")
+      expect(subject.name).to eq("PayPal")
     end
 
     context "when settings are defined" do

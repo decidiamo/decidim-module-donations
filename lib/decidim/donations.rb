@@ -18,6 +18,13 @@ module Decidim
       10
     end
 
+    # The text that appears when donating
+    # leave it empty if not necessary
+    # you can also put a (full) I18n key
+    config_accessor :terms_and_conditions do
+      "decidim.donations.terms_and_conditions"
+    end
+
     # :test / :production
     config_accessor :mode do
       Rails.env.production? ? :production : :test
@@ -39,6 +46,10 @@ module Decidim
         # password: Rails.application.secrets.donations[:password],
         # signature: Rails.application.secrets.donations[:signature]
       }
+    end
+
+    def self.find_provider_class(method)
+      "Decidim::Donations::Providers::#{method.camelize}".safe_constantize
     end
   end
 end

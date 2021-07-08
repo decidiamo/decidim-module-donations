@@ -5,7 +5,6 @@ require "activemerchant"
 
 module Decidim
   module Donations
-    # Common logic to renew authorizations
     module PaymentGateway
       extend ActiveSupport::Concern
       included do
