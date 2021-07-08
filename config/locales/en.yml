@@ -65,6 +65,7 @@ en:
         statuses:
           expired: Yes, expired
           none: None
+          pending: Yes, pending
           valid: Yes, valid
         user_donations:
           show:

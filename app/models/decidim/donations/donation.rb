@@ -25,7 +25,9 @@ module Decidim
 
         return :expired if authorization.expired?
 
-        :valid
+        return :valid if authorization.granted?
+
+        :pending
       end
     end
   end
