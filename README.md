@@ -4,6 +4,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/8b477f977d011babf92f/maintainability)](https://codeclimate.com/github/decidiamo/decidim-module-donations/maintainability)
 
+[![codecov](https://codecov.io/gh/decidiamo/decidim-module-donations/branch/main/graph/badge.svg)](https://codecov.io/gh/decidiamo/decidim-module-donations)
 
 TODO
 
