@@ -1,0 +1,67 @@
+ca:
+  activemodel:
+    attributes:
+      checkout:
+        amount: 'Vull que la meva contribució sigui de:'
+  decidim:
+    authorization_handlers:
+      admin:
+        donations:
+          help:
+            - Els usuaris han de pagar un import mínim per poder ser verificats
+            - Actualment només s'admet PayPal Express (més mètodes de pagament en el futur)
+      donations:
+        explanation: Feu una contribució monetària a l'organització per obtenir la verificació
+        fields:
+          amount: Import
+          transaction_id: ID de la Transacció
+        name: Donacions
+    donations:
+      checkout:
+        description: Una contribució per a %{organization}
+        error: 'El pagament no s''ha pogut processar: %{message}'
+        success: Pagament processat correctament!
+        title: "La donació de %{name}"
+      formated_amount: "%{amount}€"
+      providers:
+        paypal_express: PayPal
+      terms_and_conditions: |
+        <h5>En enviar aquest formulari accepteu els Termes i Condicions següents:</h5>
+
+        <p>Aquesta contribució és una donació i no és reemborsable.</p>
+      user_profile:
+        menu:
+          title: Les meves donacions
+      verification:
+        admin:
+          donations:
+            amount: Import
+            authorization: Autorització
+            date: Data
+            email: Correu electrònic
+            index:
+              title: Llista de donacions
+            method: Mètode
+            name: Usuari
+            reference: Referència
+            success: OK?
+            total_donations: Comandes totals
+            total_donations_amount: Import total
+            total_donations_successful: Pagaments amb èxit
+        authorizations:
+          create:
+            error: S'ha produït un error en crear l'autorització
+            success: Gràcies per la teva donació! Ja estàs correctament verificat!
+          new:
+            checkout: Dona amb %{provider}
+            description: Es requereix una quantitat mínima de %{minimum_amount} per completar l'autorització. Tot i que quantitat suggerida és de %{default_amount} podeu canviar-la si voleu.
+            instructions: Per completar el procés d’autorització cal fer una donació.
+            title: Fes la teva aportació
+        statuses:
+          expired: Si, caducada
+          none: Cap
+          pending: Si, pendent
+          valid: Si, vàlida
+        user_donations:
+          show:
+            title: Les meves donacions

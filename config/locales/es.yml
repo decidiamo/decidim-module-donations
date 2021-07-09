@@ -1,0 +1,67 @@
+es:
+  activemodel:
+    attributes:
+      checkout:
+        amount: 'Quiero contribuir con:'
+  decidim:
+    authorization_handlers:
+      admin:
+        donations:
+          help:
+            - Los usuarios deben pagar una cantidad mínima para ser verificados
+            - Actualmente sólo se admite PayPal Express (más métodos de pago en el futuro)
+      donations:
+        explanation: Obtén una verificación haciendo una contribución monetaria a la organización
+        fields:
+          amount: Importe
+          transaction_id: ID de la transacción
+        name: Donaciones
+    donations:
+      checkout:
+        description: Una contribución para %{organization}
+        error: 'El pago no pudo ser procesado: %{message}'
+        success: '¡Pago procesado correctamente!'
+        title: "Donación de %{name}"
+      formated_amount: "%{amount}€"
+      providers:
+        paypal_express: PayPal
+      terms_and_conditions: |
+        <h5>Al enviar este formulario, aceptas los siguientes Términos y Condiciones:</h5>
+
+        <p>Esta contribución es una donación y no es reembolsable.</p>
+      user_profile:
+        menu:
+          title: Mis donaciones
+      verification:
+        admin:
+          donations:
+            amount: Importe
+            authorization: Autorización
+            date: Fecha
+            email: Email
+            index:
+              title: Lista de donaciones
+            method: Método
+            name: Usuario
+            reference: Referencia
+            success: OK?
+            total_donations: Pedidos totales
+            total_donations_amount: Importe total
+            total_donations_successful: Pagos exitosos
+        authorizations:
+          create:
+            error: Se ha producido un error al crear la autorización
+            success: '¡Gracias por tu donación! ¡Has sido verificado correctamente!'
+          new:
+            checkout: Donar con %{provider}
+            description: Se requiere un importe mínimo de %{minimum_amount} para completar la autorización. La cantidad sugerida es de %{default_amount} pero puedes cambiarla si quieres.
+            instructions: Para completar el proceso de autorización es necesario hacer una donación.
+            title: Realiza tu aportación
+        statuses:
+          expired: Sí, caducada
+          none: Ninguna
+          pending: Sí, pendiente
+          valid: Sí, válida
+        user_donations:
+          show:
+            title: Mis donaciones
