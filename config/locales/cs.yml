@@ -15,53 +15,53 @@ cs:
         fields:
           amount: Částka
           transaction_id: ID Transakce
-        name: Donations
+        name: Dary
     donations:
       checkout:
-        description: A contribution for %{organization}
-        error: 'Payment could not be processed: %{message}'
-        success: Payment processed successfully!
-        title: "%{name}'s donation"
+        description: Příspěvek pro %{organization}
+        error: 'Platbu nelze provést: %{message}'
+        success: Platba byla úspěšně zpracována!
+        title: "Dar od %{name}"
       formated_amount: "%{amount}€"
       providers:
         paypal_express: PayPal
       terms_and_conditions: |
-        <h5>By sending this form you agree with the following Terms and Conditions:</h5>
+        <h5>Odesláním tohoto formuláře souhlasíte s následujícími obchodními podmínkami:</h5>
 
-        <p>This contribution is a donation and it is not refundable.</p>
+        <p>Tento příspěvek je darem a není vratný.</p>
       user_profile:
         menu:
-          title: My donations
+          title: Moje dary
       verification:
         admin:
           donations:
-            amount: Amount
-            authorization: Authorization
-            date: Date
-            email: Email
+            amount: Částka
+            authorization: Autorizace
+            date: Datum
+            email: E-mail
             index:
-              title: Donations list
-            method: Method
-            name: User
+              title: Seznam darů
+            method: Metoda
+            name: Uživatel
             reference: Reference
             success: OK?
-            total_donations: Total orders
-            total_donations_amount: Total amount
-            total_donations_successful: Successful payments
+            total_donations: Celkem příkazů
+            total_donations_amount: Celková částka
+            total_donations_successful: Úspěšné platby
         authorizations:
           create:
-            error: There's been an error creating the authorization
-            success: Thanks for your donation! You have been successfully verified!
+            error: Došlo k chybě při vytváření autorizace
+            success: Děkujeme za váš příspěvek! Byl jste úspěšně ověřen!
           new:
-            checkout: Donate with %{provider}
-            description: A minimum amount of %{minimum_amount} is required in order to complete the authorization. The amount suggested is %{default_amount} but you can change it if you want.
-            instructions: In order to complete the authorization process you need to make a donation.
-            title: Make your contribution
+            checkout: Přispějte pomocí %{provider}
+            description: Pro dokončení autorizace je vyžadována minimální částka %{minimum_amount}. Navrhovaná částka je %{default_amount}, ale pokud chcete, můžete ji změnit.
+            instructions: Pro dokončení autorizačního procesu je třeba darovat.
+            title: Přispějte
         statuses:
-          expired: Yes, expired
-          none: None
-          pending: Yes, pending
-          valid: Yes, valid
+          expired: Ano, vypršela platnost
+          none: Žádný
+          pending: Ano, čeká
+          valid: Ano, platný
         user_donations:
           show:
-            title: My donations
+            title: Moje dary
