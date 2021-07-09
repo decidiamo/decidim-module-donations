@@ -2,66 +2,66 @@ es:
   activemodel:
     attributes:
       checkout:
-        amount: 'I want to contribute with:'
+        amount: 'Quiero contribuir con:'
   decidim:
     authorization_handlers:
       admin:
         donations:
           help:
-            - Users have to pay a minimum amount in order to be verified
-            - Currently only PayPal Express is supported (more payment methods in the future)
+            - Los usuarios deben pagar una cantidad mínima para ser verificados
+            - Actualmente sólo se admite PayPal Express (más métodos de pago en el futuro)
       donations:
-        explanation: Get verified by making a monetary contribution to the organization
+        explanation: Obtén una verificación haciendo una contribución monetaria a la organización
         fields:
-          amount: Amount
-          transaction_id: Transaction ID
-        name: Donations
+          amount: Importe
+          transaction_id: ID de la transacción
+        name: Donaciones
     donations:
       checkout:
-        description: A contribution for %{organization}
-        error: 'Payment could not be processed: %{message}'
-        success: Payment processed successfully!
-        title: "%{name}'s donation"
+        description: Una contribución para %{organization}
+        error: 'El pago no pudo ser procesado: %{message}'
+        success: '¡Pago procesado correctamente!'
+        title: "Donación de %{name}"
       formated_amount: "%{amount}€"
       providers:
         paypal_express: PayPal
       terms_and_conditions: |
-        <h5>By sending this form you agree with the following Terms and Conditions:</h5>
+        <h5>Al enviar este formulario, aceptas los siguientes Términos y Condiciones:</h5>
 
-        <p>This contribution is a donation and it is not refundable.</p>
+        <p>Esta contribución es una donación y no es reembolsable.</p>
       user_profile:
         menu:
-          title: My donations
+          title: Mis donaciones
       verification:
         admin:
           donations:
-            amount: Amount
-            authorization: Authorization
-            date: Date
+            amount: Importe
+            authorization: Autorización
+            date: Fecha
             email: Email
             index:
-              title: Donations list
-            method: Method
-            name: User
-            reference: Reference
+              title: Lista de donaciones
+            method: Método
+            name: Usuario
+            reference: Referencia
             success: OK?
-            total_donations: Total orders
-            total_donations_amount: Total amount
-            total_donations_successful: Successful payments
+            total_donations: Pedidos totales
+            total_donations_amount: Importe total
+            total_donations_successful: Pagos exitosos
         authorizations:
           create:
-            error: There's been an error creating the authorization
-            success: Thanks for your donation! You have been successfully verified!
+            error: Se ha producido un error al crear la autorización
+            success: '¡Gracias por tu donación! ¡Has sido verificado correctamente!'
           new:
-            checkout: Donate with %{provider}
-            description: A minimum amount of %{minimum_amount} is required in order to complete the authorization. The amount suggested is %{default_amount} but you can change it if you want.
-            instructions: In order to complete the authorization process you need to make a donation.
-            title: Make your contribution
+            checkout: Donar con %{provider}
+            description: Se requiere un importe mínimo de %{minimum_amount} para completar la autorización. La cantidad sugerida es de %{default_amount} pero puedes cambiarla si quieres.
+            instructions: Para completar el proceso de autorización es necesario hacer una donación.
+            title: Realiza tu aportación
         statuses:
-          expired: Yes, expired
-          none: None
-          pending: Yes, pending
-          valid: Yes, valid
+          expired: Sí, caducada
+          none: Ninguna
+          pending: Sí, pendiente
+          valid: Sí, válida
         user_donations:
           show:
-            title: My donations
+            title: Mis donaciones
