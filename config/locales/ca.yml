@@ -1,0 +1,67 @@
+ca:
+  activemodel:
+    attributes:
+      checkout:
+        amount: 'I want to contribute with:'
+  decidim:
+    authorization_handlers:
+      admin:
+        donations:
+          help:
+            - Users have to pay a minimum amount in order to be verified
+            - Currently only PayPal Express is supported (more payment methods in the future)
+      donations:
+        explanation: Get verified by making a monetary contribution to the organization
+        fields:
+          amount: Amount
+          transaction_id: Transaction ID
+        name: Donations
+    donations:
+      checkout:
+        description: A contribution for %{organization}
+        error: 'Payment could not be processed: %{message}'
+        success: Payment processed successfully!
+        title: "%{name}'s donation"
+      formated_amount: "%{amount}€"
+      providers:
+        paypal_express: PayPal
+      terms_and_conditions: |
+        <h5>By sending this form you agree with the following Terms and Conditions:</h5>
+
+        <p>This contribution is a donation and it is not refundable.</p>
+      user_profile:
+        menu:
+          title: My donations
+      verification:
+        admin:
+          donations:
+            amount: Amount
+            authorization: Authorization
+            date: Date
+            email: Email
+            index:
+              title: Donations list
+            method: Method
+            name: User
+            reference: Reference
+            success: OK?
+            total_donations: Total orders
+            total_donations_amount: Total amount
+            total_donations_successful: Successful payments
+        authorizations:
+          create:
+            error: There's been an error creating the authorization
+            success: Thanks for your donation! You have been successfully verified!
+          new:
+            checkout: Donate with %{provider}
+            description: A minimum amount of %{minimum_amount} is required in order to complete the authorization. The amount suggested is %{default_amount} but you can change it if you want.
+            instructions: In order to complete the authorization process you need to make a donation.
+            title: Make your contribution
+        statuses:
+          expired: Yes, expired
+          none: None
+          pending: Yes, pending
+          valid: Yes, valid
+        user_donations:
+          show:
+            title: My donations
