@@ -62,6 +62,26 @@ module Decidim::Donations::Verification
       expect(controller.helpers.total_donations_amount).to eq(579.0)
     end
 
+    context "when there is pagination" do
+      let!(:donations) { create_list :donation, 51, amount: 100, user: user }
+
+      it "list of donations is paginated" do
+        expect(controller.helpers.donations.count).to eq(50)
+      end
+
+      it "total of donations is not paginated" do
+        expect(controller.helpers.total_donations).to eq(54)
+      end
+
+      it "total successful donations is not paginated" do
+        expect(controller.helpers.total_donations_successful).to eq(53)
+      end
+
+      it "total amount is not paginated" do
+        expect(controller.helpers.total_donations_amount).to eq(579.0 + 51)
+      end
+    end
+
     it "gets classes associated with checkout status" do
       get :index
 

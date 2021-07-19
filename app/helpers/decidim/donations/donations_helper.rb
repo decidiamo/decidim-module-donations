@@ -14,15 +14,15 @@ module Decidim
       end
 
       def total_donations
-        donations.count
+        donations.except(:limit, :offset).count
       end
 
       def total_donations_successful
-        donations.where(success: true).count
+        donations.except(:limit, :offset).where(success: true).count
       end
 
       def total_donations_amount
-        donations.where(success: true).sum(:amount).to_f / 100
+        donations.except(:limit, :offset).where(success: true).sum(:amount).to_f / 100
       end
     end
   end
