@@ -60,7 +60,7 @@ Decidim::Donations.configure do |config|
   config.minimum_amount = 1
   config.default_amount = 5
 
-  config.provider = :paypal_express # currently only this one supported
+  config.provider = :paypal_express # currently only this one is supported
   config.credentials = {
     login: Rails.application.secrets.donations[:login],
     password: Rails.application.secrets.donations[:password],
@@ -70,6 +70,14 @@ Decidim::Donations.configure do |config|
   # configure a custom I18n key with an HTML text of your choosing
   # set it to an empty string to avoid showing any text
   config.terms_and_conditions = "decidim.donations.terms_and_conditions"
+
+  # optionally, configure a Currency unit (ISO 4217)
+  # Rember to also change Decidim.current_unit for the symbol (ie: €, $, ...)
+  config.currency = "EUR"
+
+  # By defult, production uses production gateways mode and development/test the testing mode. You can force otherwise by changing the next configuration
+  # valid values are :production and :test
+  # config.mode = :production
 end
 ```
 
