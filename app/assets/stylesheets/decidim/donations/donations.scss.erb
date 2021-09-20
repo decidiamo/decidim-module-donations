@@ -1,4 +1,4 @@
-.decidim-donations {
+.decidim-donations,.decidim-user-donations{
   .amount {
     font-weight: 600;
   }
@@ -9,10 +9,13 @@
       font-size: 1.2em;
     }
   }
-  .terms-and-conditions {
+  .terms-and-conditions, .description {
     margin-top: 2em;
   }
   .checkout-form {
+    >.amount {
+      width: 33.33%;
+    }
     label[for="checkout_amount"] {
       font-weight: 600;
       font-size: 1.5em;
@@ -57,6 +60,31 @@
   &-expired {
     .authorization-status {
       color: #bb0000;
+    }
+  }
+}
+
+.button--title {
+  margin-bottom: 0;
+  float: right;
+  
+  &:not(:first-child) {
+    margin-right: 1rem;
+  }
+}
+
+.decidim-user-donations {
+  .description {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    margin-left: 0;
+    .text-center {
+      text-align: left;
+    }
+  }
+  .checkout-form {
+    >.amount {
+      width: 50%;
     }
   }
 }

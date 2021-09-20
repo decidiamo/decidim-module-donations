@@ -1,0 +1,27 @@
+<div class="description">
+  <div class="text-center">
+    <p><%== t(".description", minimum_amount: formmatted_amount(minimum_amount), default_amount: formmatted_amount(default_amount)) %></p>
+  </div>
+</div>
+
+<div class="row checkout-form">
+  <div class="amount medium-centered">
+    <%= decidim_form_for(form, url: process_path) do |form| %>
+      <%= form.number_field :amount %>
+
+      <div class="actions">
+        <%= form.submit t(".checkout", provider: "<span class='provider #{provider.method}'>#{provider.name}</span>").html_safe, class: "button expanded primary large" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if terms_and_conditions %>
+  <div class="terms-and-conditions">
+    <div class="medium-centered mb-s text-center">
+      <%== terms_and_conditions %>
+    </div>
+  </div>
+<% end %>
+
+<%= stylesheet_link_tag "decidim/donations/donations" %>

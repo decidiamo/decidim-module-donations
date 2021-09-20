@@ -84,8 +84,10 @@ module Decidim
                                          ip: request.remote_ip,
                                          return_url: decidim_donations.checkout_authorization_url,
                                          cancel_return_url: decidim_donations.checkout_authorization_url,
+                                         process_path: authorization_path,
                                          title: I18n.t("checkout.title", name: current_user.name, scope: "decidim.donations"),
-                                         description: I18n.t("checkout.description", organization: current_organization.name, scope: "decidim.donations"))
+                                         description: I18n.t("checkout.description", organization: current_organization.name, scope: "decidim.donations"),
+                                         minimum_amount: Donations.verification_amount)
         end
 
         def authorization_form
@@ -100,18 +102,6 @@ module Decidim
             user: current_user,
             name: "donations"
           )
-        end
-
-        def minimum_amount
-          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.verification_amount, scope: "decidim.donations")}</span>"
-        end
-
-        def default_amount
-          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.default_amount, scope: "decidim.donations")}</span>"
-        end
-
-        def terms_and_conditions
-          @terms_and_conditions ||= I18n.t(Donations.terms_and_conditions, default: Donations.terms_and_conditions)
         end
       end
     end

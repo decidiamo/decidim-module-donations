@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "donations/version"
+require_relative "donations/engine"
 require_relative "donations/verification"
 require_relative "donations/providers"
 
@@ -64,3 +65,12 @@ module Decidim
     end
   end
 end
+
+# Engines to handle logic unrelated to participatory spaces or components need to be registered independently
+
+Decidim.register_global_engine(
+  :decidim_user_donations, # this is the name of the global method to access engine routes,
+  # can't use decidim_donations as is the one assigned by the verification engine
+  ::Decidim::Donations::Engine,
+  at: "/donations"
+)
