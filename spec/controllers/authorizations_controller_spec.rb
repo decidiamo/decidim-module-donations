@@ -67,7 +67,7 @@ module Decidim::Donations::Verification
       sign_in current_user, scope: :user
     end
 
-    context "when requesting a new authrorization" do
+    context "when requesting a new authorization" do
       it "renders new template" do
         get :new
 
@@ -78,7 +78,7 @@ module Decidim::Donations::Verification
         get :new
 
         expect(Decidim::Donations.verification_amount).to eq(verification_amount)
-        expect(controller.send(:checkout_form).context.minimum_amount).to eq(verification_amount)
+        expect(controller.send(:checkout_form).minimum_amount).to eq(verification_amount)
       end
 
       context "when no verification amount specified" do
@@ -88,12 +88,12 @@ module Decidim::Donations::Verification
           get :new
 
           expect(Decidim::Donations.verification_amount).to eq(Decidim::Donations.minimum_amount)
-          expect(controller.send(:checkout_form).context.minimum_amount).to eq(minimum_amount)
+          expect(controller.send(:checkout_form).minimum_amount).to eq(minimum_amount)
         end
       end
     end
 
-    context "when creating a new authrorization" do
+    context "when creating a new authorization" do
       context "and is multistep" do
         it "redirects to the gateway" do
           post :create, params: params

@@ -46,7 +46,6 @@ module Decidim::Donations
       expect(subject).to have_css("input#checkout_amount")
       expect(subject.find("form").native.attributes["action"].to_s).to eq("some-post-process-path")
       expect(subject).to have_content("I want to contribute with:")
-      expect(subject).to have_field("checkout[amount]", with: Decidim::Donations.config.default_amount)
       expect(subject).to have_content("Terms and Conditions")
     end
 

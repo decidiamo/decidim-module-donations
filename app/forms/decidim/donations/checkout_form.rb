@@ -7,7 +7,7 @@ module Decidim
       attribute :token
       attribute :payer_id
 
-      validates :amount, numericality: { greater_than_or_equal_to: ->(form) { form.context.minimum_amount || Donations.config.minimum_amount } }, unless: ->(form) { form.token }
+      validates :amount, numericality: { greater_than_or_equal_to: ->(form) { form.minimum_amount } }, unless: ->(form) { form.token }
 
       def order
         {
@@ -19,6 +19,10 @@ module Decidim
           title: context.title,
           description: context.description
         }
+      end
+
+      def minimum_amount
+        context.minimum_amount || Donations.config.minimum_amount
       end
     end
   end

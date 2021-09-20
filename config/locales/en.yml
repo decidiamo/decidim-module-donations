@@ -28,7 +28,7 @@ en:
         amount_errors: The amount is incorrect
         description: A contribution for %{organization}
         error: 'Payment could not be processed: %{message}'
-        success: Payment processed successfully!
+        success: Payment processed successfully. You contribution is greatly appreciated!
         title: "%{name}'s donation"
       formated_amount: "%{amount}€"
       providers:
