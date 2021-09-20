@@ -17,10 +17,14 @@ cs:
           transaction_id: ID Transakce
         name: Dary
     donations:
+      amount_form:
+        checkout: Donate with %{provider}
+        description: A minimum amount of %{minimum_amount} is required in order to complete the authorization.<br>The amount suggested is %{default_amount} but you can change it if you want.
       checkout:
+        amount_errors: The amount is incorrect
         description: Příspěvek pro %{organization}
         error: 'Platbu nelze provést: %{message}'
-        success: Platba byla úspěšně zpracována!
+        success: Payment processed successfully. You contribution is greatly appreciated!
         title: "Dar od %{name}"
       formated_amount: "%{amount}€"
       providers:
@@ -29,6 +33,12 @@ cs:
         <h5>Odesláním tohoto formuláře souhlasíte s následujícími obchodními podmínkami:</h5>
 
         <p>Tento příspěvek je darem a není vratný.</p>
+      user_donations:
+        new:
+          title: Make a new donation
+        show:
+          new_donation: "\U0001F31F New donation"
+          title: My donations
       user_profile:
         menu:
           title: Moje dary
@@ -53,8 +63,6 @@ cs:
             error: Došlo k chybě při vytváření autorizace
             success: Děkujeme za váš příspěvek! Byl jste úspěšně ověřen!
           new:
-            checkout: Přispějte pomocí %{provider}
-            description: Pro dokončení autorizace je vyžadována minimální částka %{minimum_amount}. Navrhovaná částka je %{default_amount}, ale pokud chcete, můžete ji změnit.
             instructions: Pro dokončení autorizačního procesu je třeba darovat.
             title: Přispějte
         statuses:
@@ -62,6 +70,3 @@ cs:
           none: Žádný
           pending: Ano, čeká
           valid: Ano, platný
-        user_donations:
-          show:
-            title: Moje dary
