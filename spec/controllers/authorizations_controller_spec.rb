@@ -91,6 +91,16 @@ module Decidim::Donations::Verification
           expect(controller.send(:checkout_form).minimum_amount).to eq(minimum_amount)
         end
       end
+
+      context "and user is already verified" do
+        let!(:authorization) { create(:authorization, :granted, user: current_user, name: "donations") }
+
+        it "redirects to user donations" do
+          get :new
+
+          expect(response).to redirect_to("/donations/user_donations/new")
+        end
+      end
     end
 
     context "when creating a new authorization" do

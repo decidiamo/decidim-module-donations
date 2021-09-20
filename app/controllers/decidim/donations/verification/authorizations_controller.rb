@@ -11,6 +11,8 @@ module Decidim
         helper_method :authorization, :provider
 
         def new
+          return redirect_to decidim_user_donations.new_user_donations_path if authorization_already_active?
+
           enforce_permission_to :create, :authorization, authorization: authorization
 
           @form = checkout_form
@@ -102,6 +104,12 @@ module Decidim
             user: current_user,
             name: "donations"
           )
+        end
+
+        def authorization_already_active?
+          return unless authorization
+
+          authorization.granted?
         end
       end
     end
