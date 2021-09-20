@@ -1,5 +1,6 @@
 <h2>
   <%= t(".title") %>
+  <%= link_to t(".new_donation"), new_user_donations_path, class: "button button--title" %>
 </h2>
 
 <table class="table-list">
@@ -36,4 +37,4 @@
   <strong><%= t "total_donations_amount", scope: "decidim.donations.verification.admin.donations" %>:&nbsp;</strong><span><%= amount_to_currency total_donations_amount %></span>
 </div>
 
-<%= stylesheet_link_tag "decidim/donations/verification" %>
+<%= stylesheet_link_tag "decidim/donations/donations" %>

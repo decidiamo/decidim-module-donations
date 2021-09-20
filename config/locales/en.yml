@@ -19,10 +19,16 @@ en:
           transaction_id: Transaction ID
         name: Donations
     donations:
+      amount_form:
+        checkout: Donate with %{provider}
+        description: A minimum amount of %{minimum_amount} is required in order to
+          complete the authorization.<br>The amount suggested is %{default_amount}
+          but you can change it if you want.
       checkout:
+        amount_errors: The amount is incorrect
         description: A contribution for %{organization}
         error: 'Payment could not be processed: %{message}'
-        success: Payment processed successfully!
+        success: Payment processed successfully. You contribution is greatly appreciated!
         title: "%{name}'s donation"
       formated_amount: "%{amount}€"
       providers:
@@ -31,6 +37,12 @@ en:
         <h5>By sending this form you agree with the following Terms and Conditions:</h5>
 
         <p>This contribution is a donation and it is not refundable.</p>
+      user_donations:
+        new:
+          title: Make a new donation
+        show:
+          new_donation: "\U0001F31F New donation"
+          title: My donations
       user_profile:
         menu:
           title: My donations
@@ -55,10 +67,6 @@ en:
             error: There's been an error creating the authorization
             success: Thanks for your donation! You have been successfully verified!
           new:
-            checkout: Donate with %{provider}
-            description: A minimum amount of %{minimum_amount} is required in order
-              to complete the authorization. The amount suggested is %{default_amount}
-              but you can change it if you want.
             instructions: In order to complete the authorization process you need
               to make a donation.
             title: Make your contribution
@@ -67,6 +75,3 @@ en:
           none: None
           pending: Yes, pending
           valid: Yes, valid
-        user_donations:
-          show:
-            title: My donations

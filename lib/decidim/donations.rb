@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "donations/version"
+require_relative "donations/engine"
 require_relative "donations/verification"
 require_relative "donations/providers"
 
@@ -10,8 +11,15 @@ module Decidim
 
     include ActiveSupport::Configurable
 
+    # minimum amount to accept a donation
     config_accessor :minimum_amount do
-      5
+      1
+    end
+
+    # minim amount that allows the user to be verificated
+    # defaults to minimum_amount
+    config_accessor :verification_amount do
+      nil
     end
 
     config_accessor :default_amount do
@@ -48,8 +56,21 @@ module Decidim
       }
     end
 
+    def self.verification_amount
+      Donations.config.verification_amount || Donations.config.minimum_amount
+    end
+
     def self.find_provider_class(method)
       "Decidim::Donations::Providers::#{method.camelize}".safe_constantize
     end
   end
 end
+
+# Engines to handle logic unrelated to participatory spaces or components need to be registered independently
+
+Decidim.register_global_engine(
+  :decidim_user_donations, # this is the name of the global method to access engine routes,
+  # can't use decidim_donations as is the one assigned by the verification engine
+  ::Decidim::Donations::Engine,
+  at: "/donations"
+)

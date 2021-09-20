@@ -8,7 +8,7 @@ module Decidim
         include FormFactory
         include PaymentGateway
 
-        helper_method :authorization, :minimum_amount, :default_amount, :provider, :terms_and_conditions
+        helper_method :authorization, :provider
 
         def new
           enforce_permission_to :create, :authorization, authorization: authorization
@@ -21,6 +21,12 @@ module Decidim
           enforce_permission_to :create, :authorization, authorization: authorization
 
           @form = checkout_form
+
+          if @form.invalid?
+            flash[:alert] = t("checkout.error", scope: "decidim.donations", message: t("checkout.amount_errors", scope: "decidim.donations"))
+            return render :new
+          end
+
           if provider.multistep?
             response = provider.setup_purchase(order: @form.order, params: @form.attributes)
             if response.success?
@@ -33,7 +39,7 @@ module Decidim
             flash[:alert] = t("checkout.error", scope: "decidim.donations", message: response.message)
             return redirect_to decidim_donations.new_authorization_path
           end
-          # TODO: check if this works for providers non multistep provider (ie non paypal)
+          # TODO: check if this works for providers non-multistep (ie non paypal)
           checkout
         end
 
@@ -78,8 +84,10 @@ module Decidim
                                          ip: request.remote_ip,
                                          return_url: decidim_donations.checkout_authorization_url,
                                          cancel_return_url: decidim_donations.checkout_authorization_url,
+                                         process_path: authorization_path,
                                          title: I18n.t("checkout.title", name: current_user.name, scope: "decidim.donations"),
-                                         description: I18n.t("checkout.description", organization: current_organization.name, scope: "decidim.donations"))
+                                         description: I18n.t("checkout.description", organization: current_organization.name, scope: "decidim.donations"),
+                                         minimum_amount: Donations.verification_amount)
         end
 
         def authorization_form
@@ -94,18 +102,6 @@ module Decidim
             user: current_user,
             name: "donations"
           )
-        end
-
-        def minimum_amount
-          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.minimum_amount, scope: "decidim.donations")}</span>"
-        end
-
-        def default_amount
-          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.default_amount, scope: "decidim.donations")}</span>"
-        end
-
-        def terms_and_conditions
-          @terms_and_conditions ||= I18n.t(Donations.terms_and_conditions, default: Donations.terms_and_conditions)
         end
       end
     end

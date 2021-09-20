@@ -48,6 +48,9 @@ module Decidim::Donations::Verification
         amount: amount
       }
     end
+    let(:minimum_amount) { 3 }
+    let(:default_amount) { 7 }
+    let(:verification_amount) { 4 }
 
     before do
       allow(subject).to receive(:provider).and_return(provider)
@@ -55,49 +58,42 @@ module Decidim::Donations::Verification
       allow(provider).to receive(:details_for).and_return(payment)
       allow(provider).to receive(:purchase).and_return(purchase_response)
       allow(provider.gateway).to receive(:redirect_url_for).and_return(redirect_url)
+
+      Decidim::Donations.config.minimum_amount = minimum_amount
+      Decidim::Donations.config.verification_amount = verification_amount
+      Decidim::Donations.config.default_amount = default_amount
+
       request.env["decidim.current_organization"] = organization
       sign_in current_user, scope: :user
     end
 
-    context "when requesting a new authrorization" do
+    context "when requesting a new authorization" do
       it "renders new template" do
         get :new
 
         expect(subject).to render_template(:new)
       end
 
-      it "renders terms and conditions" do
+      it "changes the amount in helpers" do
         get :new
 
-        expect(controller.helpers.terms_and_conditions).to include("Terms and Conditions")
+        expect(Decidim::Donations.verification_amount).to eq(verification_amount)
+        expect(controller.send(:checkout_form).minimum_amount).to eq(verification_amount)
       end
 
-      context "when no terms and conditions" do
-        before do
-          allow(Decidim::Donations).to receive(:terms_and_conditions).and_return(nil)
-        end
+      context "when no verification amount specified" do
+        let(:verification_amount) { nil }
 
-        it "renders nothing" do
+        it "defaults to minimum_amount" do
           get :new
 
-          expect(controller.helpers.terms_and_conditions).to be_blank
-        end
-      end
-
-      context "when terms and conditions is not a I18n key" do
-        before do
-          allow(Decidim::Donations).to receive(:terms_and_conditions).and_return("Ducky Lucky")
-        end
-
-        it "renders the text" do
-          get :new
-
-          expect(controller.helpers.terms_and_conditions).to eq("Ducky Lucky")
+          expect(Decidim::Donations.verification_amount).to eq(Decidim::Donations.minimum_amount)
+          expect(controller.send(:checkout_form).minimum_amount).to eq(minimum_amount)
         end
       end
     end
 
-    context "when creating a new authrorization" do
+    context "when creating a new authorization" do
       context "and is multistep" do
         it "redirects to the gateway" do
           post :create, params: params
@@ -125,6 +121,17 @@ module Decidim::Donations::Verification
 
           expect(response).to redirect_to("/authorizations")
           expect(flash[:notice]).to eq("Thanks for your donation! You have been successfully verified!")
+        end
+      end
+
+      context "and the amount is not correct" do
+        let(:amount) { 3 }
+
+        it "shows an error message" do
+          post :create, params: params
+
+          expect(response).not_to redirect_to(redirect_url)
+          expect(flash[:alert]).to include("amount is incorrect")
         end
       end
     end

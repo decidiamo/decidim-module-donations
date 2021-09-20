@@ -28,7 +28,7 @@ module Decidim::Donations::Verification
       sign_in current_user, scope: :user
     end
 
-    context "when requesting a new authrorization" do
+    context "when requesting a new authorization" do
       it "renders new template" do
         get :new
 
