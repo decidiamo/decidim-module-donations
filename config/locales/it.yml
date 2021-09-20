@@ -17,10 +17,14 @@ it:
           transaction_id: ID transazione
         name: Donazioni
     donations:
+      amount_form:
+        checkout: Donate with %{provider}
+        description: A minimum amount of %{minimum_amount} is required in order to complete the authorization.<br>The amount suggested is %{default_amount} but you can change it if you want.
       checkout:
+        amount_errors: The amount is incorrect
         description: Un contributo per %{organization}
         error: 'Non è stato possibile elaborare il pagamento: %{message}'
-        success: Pagamento elaborato correttamente!
+        success: Payment processed successfully. You contribution is greatly appreciated!
         title: "Donazione di %{name}"
       formated_amount: "%{amount}€"
       providers:
@@ -29,6 +33,12 @@ it:
         <h5>Inviando questo modulo accetti i seguenti Termini e Condizioni:</h5>
 
         <p>Questo contributo è una donazione e non è rimborsabile.</p>
+      user_donations:
+        new:
+          title: Make a new donation
+        show:
+          new_donation: "\U0001F31F New donation"
+          title: My donations
       user_profile:
         menu:
           title: Le mie donazioni
@@ -53,8 +63,6 @@ it:
             error: Si è verificato un errore durante la creazione dell'autorizzazione
             success: Grazie per la tua donazione! Sei stato verificato con successo!
           new:
-            checkout: Dona con %{provider}
-            description: Per completare la verifica è richiesto un importo minimo di %{minimum_amount}. L'importo suggerito è %{default_amount}, ma puoi cambiarlo se vuoi.
             instructions: Per completare il processo di verifica è necessario effettuare una donazione.
             title: Effettua una donazione
         statuses:
@@ -62,6 +70,3 @@ it:
           none: Nessuno
           pending: Sì, in sospeso
           valid: Sì, valido
-        user_donations:
-          show:
-            title: Le mie donazioni
