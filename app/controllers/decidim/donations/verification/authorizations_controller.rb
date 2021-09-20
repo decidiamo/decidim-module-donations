@@ -8,7 +8,7 @@ module Decidim
         include FormFactory
         include PaymentGateway
 
-        helper_method :authorization
+        helper_method :authorization, :provider
 
         def new
           enforce_permission_to :create, :authorization, authorization: authorization

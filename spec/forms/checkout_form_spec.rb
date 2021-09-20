@@ -7,11 +7,16 @@ module Decidim::Donations
     subject do
       described_class.from_params(
         attributes
-      ).with_context(current_organization: organization)
+      ).with_context(context)
     end
 
     let(:organization) { create :organization }
-
+    let(:context) do
+      {
+        current_organization: organization,
+        minimum_amount: nil
+      }
+    end
     let(:amount) { 15 }
     let(:token) { nil }
     let(:attributes) do
@@ -19,6 +24,13 @@ module Decidim::Donations
         amount: amount,
         token: token
       }
+    end
+    let(:minimum_amount) { 5 }
+    let(:default_amount) { 7 }
+
+    before do
+      Decidim::Donations.config.minimum_amount = minimum_amount
+      Decidim::Donations.config.default_amount = default_amount
     end
 
     it { is_expected.to be_valid }
@@ -56,6 +68,17 @@ module Decidim::Donations
       let(:amount) { 4 }
 
       it_behaves_like "amount invalid"
+
+      context "when minimum is specified through context" do
+        let(:context) do
+          {
+            current_organization: organization,
+            minimum_amount: 4
+          }
+        end
+
+        it { is_expected.to be_valid }
+      end
     end
   end
 end

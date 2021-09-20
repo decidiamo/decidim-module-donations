@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::Donations::Verification
   describe UserDonationsController, type: :controller do
-    routes { Decidim::Donations::Verification::Engine.routes }
+    routes { Decidim::Donations::Engine.routes }
 
     let(:organization) do
       create(
