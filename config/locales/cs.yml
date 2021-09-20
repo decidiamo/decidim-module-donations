@@ -18,13 +18,13 @@ cs:
         name: Dary
     donations:
       amount_form:
-        checkout: Donate with %{provider}
-        description: A minimum amount of %{minimum_amount} is required in order to complete the authorization.<br>The amount suggested is %{default_amount} but you can change it if you want.
+        checkout: Přispějte pomocí %{provider}
+        description: Pro dokončení autorizace je vyžadováno minimální částka %{minimum_amount}.<br>Navržená částka je %{default_amount}, ale můžete ji změnit, pokud chcete.
       checkout:
-        amount_errors: The amount is incorrect
+        amount_errors: Neplatná částka
         description: Příspěvek pro %{organization}
         error: 'Platbu nelze provést: %{message}'
-        success: Payment processed successfully. You contribution is greatly appreciated!
+        success: Platba byla úspěšně zpracována. Váš příspěvek velmi oceňujeme!
         title: "Dar od %{name}"
       formated_amount: "%{amount}€"
       providers:
@@ -35,10 +35,10 @@ cs:
         <p>Tento příspěvek je darem a není vratný.</p>
       user_donations:
         new:
-          title: Make a new donation
+          title: Darujte
         show:
-          new_donation: "\U0001F31F New donation"
-          title: My donations
+          new_donation: "\U0001F31F Nový příspěvek"
+          title: Moje dary
       user_profile:
         menu:
           title: Moje dary
