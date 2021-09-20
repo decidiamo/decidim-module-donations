@@ -18,13 +18,13 @@ es:
         name: Donaciones
     donations:
       amount_form:
-        checkout: Donate with %{provider}
-        description: A minimum amount of %{minimum_amount} is required in order to complete the authorization.<br>The amount suggested is %{default_amount} but you can change it if you want.
+        checkout: Donar con %{provider}
+        description: Se requiere un importe mínimo de %{minimum_amount} para completar la autorización.<br>La cantidad sugerida es de %{default_amount} pero puedes cambiarla si quieres.
       checkout:
-        amount_errors: The amount is incorrect
+        amount_errors: El importe es incorrecto
         description: Una contribución para %{organization}
         error: 'El pago no pudo ser procesado: %{message}'
-        success: Payment processed successfully. You contribution is greatly appreciated!
+        success: Pago procesado con éxito. ¡Muchas gracias por tu contribución!
         title: "Donación de %{name}"
       formated_amount: "%{amount}€"
       providers:
@@ -35,10 +35,10 @@ es:
         <p>Esta contribución es una donación y no es reembolsable.</p>
       user_donations:
         new:
-          title: Make a new donation
+          title: Realizar una nueva donación
         show:
-          new_donation: "\U0001F31F New donation"
-          title: My donations
+          new_donation: "\U0001F31F Nueva donación"
+          title: Mis donaciones
       user_profile:
         menu:
           title: Mis donaciones
