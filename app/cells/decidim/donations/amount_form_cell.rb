@@ -10,7 +10,7 @@ module Decidim
       end
 
       def minimum_amount
-        form.context.minimum_amount || Donations.config.minimum_amount
+        form.context&.minimum_amount || Donations.config.minimum_amount
       end
 
       def default_amount

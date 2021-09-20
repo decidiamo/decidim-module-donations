@@ -91,36 +91,6 @@ module Decidim::Donations::Verification
           expect(controller.send(:checkout_form).context.minimum_amount).to eq(minimum_amount)
         end
       end
-
-      # it "renders terms and conditions" do
-      #   get :new
-
-      #   expect(controller.helpers.terms_and_conditions).to include("Terms and Conditions")
-      # end
-
-      # context "when no terms and conditions" do
-      #   before do
-      #     allow(Decidim::Donations).to receive(:terms_and_conditions).and_return(nil)
-      #   end
-
-      #   it "renders nothing" do
-      #     get :new
-
-      #     expect(controller.helpers.terms_and_conditions).to be_blank
-      #   end
-      # end
-
-      # context "when terms and conditions is not a I18n key" do
-      #   before do
-      #     allow(Decidim::Donations).to receive(:terms_and_conditions).and_return("Ducky Lucky")
-      #   end
-
-      #   it "renders the text" do
-      #     get :new
-
-      #     expect(controller.helpers.terms_and_conditions).to eq("Ducky Lucky")
-      #   end
-      # end
     end
 
     context "when creating a new authrorization" do
