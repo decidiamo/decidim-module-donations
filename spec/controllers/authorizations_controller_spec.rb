@@ -48,6 +48,9 @@ module Decidim::Donations::Verification
         amount: amount
       }
     end
+    let(:minimum_amount) { 3 }
+    let(:default_amount) { 7 }
+    let(:verification_amount) { 4 }
 
     before do
       allow(subject).to receive(:provider).and_return(provider)
@@ -55,6 +58,11 @@ module Decidim::Donations::Verification
       allow(provider).to receive(:details_for).and_return(payment)
       allow(provider).to receive(:purchase).and_return(purchase_response)
       allow(provider.gateway).to receive(:redirect_url_for).and_return(redirect_url)
+
+      Decidim::Donations.config.minimum_amount = minimum_amount
+      Decidim::Donations.config.verification_amount = verification_amount
+      Decidim::Donations.config.default_amount = default_amount
+
       request.env["decidim.current_organization"] = organization
       sign_in current_user, scope: :user
     end
@@ -64,6 +72,26 @@ module Decidim::Donations::Verification
         get :new
 
         expect(subject).to render_template(:new)
+      end
+
+      it "changes the amount in helpers" do
+        get :new
+
+        expect(Decidim::Donations.verification_amount).to eq(verification_amount)
+        expect(controller.helpers.minimum_amount).to include("#{verification_amount}€")
+        expect(controller.helpers.default_amount).to include("#{default_amount}€")
+      end
+
+      context "when no verification amount specified" do
+        let(:verification_amount) { nil }
+
+        it "defaults to minimum_amount" do
+          get :new
+
+          expect(Decidim::Donations.verification_amount).to eq(Decidim::Donations.minimum_amount)
+          expect(controller.helpers.minimum_amount).to include("#{Decidim::Donations.config.minimum_amount}€")
+          expect(controller.helpers.default_amount).to include("#{Decidim::Donations.config.default_amount}€")
+        end
       end
 
       it "renders terms and conditions" do
@@ -125,6 +153,17 @@ module Decidim::Donations::Verification
 
           expect(response).to redirect_to("/authorizations")
           expect(flash[:notice]).to eq("Thanks for your donation! You have been successfully verified!")
+        end
+      end
+
+      context "and the amount is not correct" do
+        let(:amount) { 3 }
+
+        it "shows an error message" do
+          post :create, params: params
+
+          expect(response).not_to redirect_to(redirect_url)
+          expect(flash[:alert]).to include("amount is incorrect")
         end
       end
     end

@@ -10,8 +10,15 @@ module Decidim
 
     include ActiveSupport::Configurable
 
+    # minimum amount to accept a donation
     config_accessor :minimum_amount do
-      5
+      1
+    end
+
+    # minim amount that allows the user to be verificated
+    # defaults to minimum_amount
+    config_accessor :verification_amount do
+      nil
     end
 
     config_accessor :default_amount do
@@ -46,6 +53,10 @@ module Decidim
         # password: Rails.application.secrets.donations[:password],
         # signature: Rails.application.secrets.donations[:signature]
       }
+    end
+
+    def self.verification_amount
+      Donations.config.verification_amount || Donations.config.minimum_amount
     end
 
     def self.find_provider_class(method)

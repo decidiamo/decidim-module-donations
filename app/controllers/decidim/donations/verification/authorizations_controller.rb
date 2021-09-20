@@ -21,6 +21,12 @@ module Decidim
           enforce_permission_to :create, :authorization, authorization: authorization
 
           @form = checkout_form
+
+          if @form.invalid?
+            flash[:alert] = t("checkout.error", scope: "decidim.donations", message: t("checkout.amount_errors", scope: "decidim.donations"))
+            return render :new
+          end
+
           if provider.multistep?
             response = provider.setup_purchase(order: @form.order, params: @form.attributes)
             if response.success?
@@ -33,7 +39,7 @@ module Decidim
             flash[:alert] = t("checkout.error", scope: "decidim.donations", message: response.message)
             return redirect_to decidim_donations.new_authorization_path
           end
-          # TODO: check if this works for providers non multistep provider (ie non paypal)
+          # TODO: check if this works for providers non-multistep (ie non paypal)
           checkout
         end
 
@@ -97,7 +103,7 @@ module Decidim
         end
 
         def minimum_amount
-          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.minimum_amount, scope: "decidim.donations")}</span>"
+          "<span class=\"amount\">#{I18n.t("formated_amount", amount: Donations.verification_amount, scope: "decidim.donations")}</span>"
         end
 
         def default_amount

@@ -22,6 +22,7 @@ en:
       checkout:
         description: A contribution for %{organization}
         error: 'Payment could not be processed: %{message}'
+        amount_errors: 'The amount is incorrect'
         success: Payment processed successfully!
         title: "%{name}'s donation"
       formated_amount: "%{amount}€"
