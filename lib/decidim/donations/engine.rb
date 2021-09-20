@@ -28,8 +28,7 @@ module Decidim
         Decidim.menu :user_menu do |menu|
           menu.item t("menu.title", scope: "decidim.donations.user_profile"),
                     decidim_user_donations.user_donations_path,
-                    position: 1.5,
-                    active: :exact
+                    position: 1.5
         end
       end
     end
