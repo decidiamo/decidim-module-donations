@@ -4,7 +4,7 @@ require "decidim/core/test/factories"
 
 FactoryBot.define do
   factory :donation, class: "Decidim::Donations::Donation" do
-    amount { Faker::Number.number(digits: 2) }
+    amount { Faker::Number.number(digits: 4) }
     reference { Faker::Invoice.reference }
     user { build(:user) }
     title { I18n.t("checkout.title", name: user.name, scope: "decidim.donations") }
