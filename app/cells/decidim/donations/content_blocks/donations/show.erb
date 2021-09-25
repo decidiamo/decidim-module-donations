@@ -14,7 +14,7 @@
     <% if circle1 %>
       <div class="column large-6 circle">
         <%= circle1 %>
-        <p><%= t("amount_goal", goal: "#{amount}", scope: i18n_scope) %></p>
+        <p><%= t("amount_goal", goal: "#{amount_to_currency(amount_goal)}", scope: i18n_scope) %></p>
       </div>
     <% end %>
     <% if circle2 %>

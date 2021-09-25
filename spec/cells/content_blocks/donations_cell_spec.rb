@@ -40,9 +40,9 @@ module Decidim::Donations
     end
 
     context "when there are several donations" do
-      let!(:donation1) { create :donation, user: user, amount: 8700 }
-      let!(:donation2) { create :donation, user: user, amount: 1700 }
-      let!(:donation3) { create :donation, user: user, amount: 5000 }
+      let!(:donation1) { create :donation, user: user, amount: 8700, created_at: 1.day.ago }
+      let!(:donation2) { create :donation, user: user, amount: 1700, created_at: 2.days.ago }
+      let!(:donation3) { create :donation, user: user, amount: 5000, created_at: 3.days.ago }
 
       shared_examples "exact amount" do
         it "shows the amounts" do
@@ -55,8 +55,77 @@ module Decidim::Donations
 
       context "and there are donations from other organizations" do
         let!(:donation4) { create :donation, amount: 5000 }
-      
+
         it_behaves_like "exact amount"
+      end
+
+      context "when a date is defined" do
+        let(:settings) do
+          {
+            start_date: I18n.l(2.days.ago, format: :decidim_short)
+          }
+        end
+
+        it "shows the amounts" do
+          expect(subject).to have_content("€104")
+          expect(subject).to have_content("2 donations")
+        end
+      end
+
+      context "when an amount goal is defined" do
+        let(:settings) do
+          {
+            amount_goal: 213
+          }
+        end
+
+        it_behaves_like "exact amount"
+
+        it "shows the percent" do
+          expect(subject).to have_content("amount goal: €213")
+          expect(subject).to have_content("72%")
+          expect(subject).not_to have_content("60%")
+        end
+
+        context "and is surpassed" do
+          let(:settings) do
+            {
+              amount_goal: 100
+            }
+          end
+
+          it "shows 100%" do
+            expect(subject).to have_content("100%")
+          end
+        end
+      end
+
+      context "when a total goal is defined" do
+        let(:settings) do
+          {
+            total_goal: 5
+          }
+        end
+
+        it_behaves_like "exact amount"
+
+        it "shows the percent" do
+          expect(subject).to have_content("donations goal: 5")
+          expect(subject).to have_content("60%")
+          expect(subject).not_to have_content("72%")
+        end
+
+        context "and is surpassed" do
+          let(:settings) do
+            {
+              total_goal: 2
+            }
+          end
+
+          it "shows 100%" do
+            expect(subject).to have_content("100%")
+          end
+        end
       end
     end
   end
