@@ -82,7 +82,7 @@ module Decidim::Donations
         it_behaves_like "exact amount"
 
         it "shows the percent" do
-          expect(subject).to have_content("amount goal: €213")
+          expect(subject).to have_content("Help us reach €213")
           expect(subject).to have_content("72%")
           expect(subject).not_to have_content("60%")
         end
@@ -110,7 +110,7 @@ module Decidim::Donations
         it_behaves_like "exact amount"
 
         it "shows the percent" do
-          expect(subject).to have_content("donations goal: 5")
+          expect(subject).to have_content("one of the 5")
           expect(subject).to have_content("60%")
           expect(subject).not_to have_content("72%")
         end

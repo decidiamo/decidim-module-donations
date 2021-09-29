@@ -62,7 +62,7 @@ module Decidim
         def amount_progress_circle
           circle(percent(total_donations_amount, amount_goal))
         end
-        
+
         def count_progress_circle
           circle(percent(total_donations_successful, total_goal))
         end
