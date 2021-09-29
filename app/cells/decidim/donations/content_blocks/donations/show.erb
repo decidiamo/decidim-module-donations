@@ -1,33 +1,29 @@
-<% circle1 = circle(percent(total_donations_amount, amount_goal)) %>
-<% circle2 = circle(percent(total_donations_successful, total_goal), color: :secondary) %>
 <section class="wrapper-home home-section">
   <div class="row" id="donations-summary">
     <h3 class="section-heading"><%= t("title", scope: i18n_scope) %></h3>
     <div class="row">
-      <div class="column large-8">
+      <div class="column large-4 mb-m">
         <h3><%= collected_text %></h3>
+        <%= link_to t("new", scope: i18n_scope), decidim_donations.root_path, class: "button expanded large mt-m" %>
       </div>
-      <div class="column large-4">
-        <%= link_to t("new", scope: i18n_scope), decidim_donations.root_path, class: "button button--title" %>
-      </div>
-    </div>
-    <% if circle1 %>
-      <div class="column large-6 circle">
-        <%= circle1 %>
-        <p><%= t("amount_goal", goal: "#{amount_to_currency(amount_goal)}", scope: i18n_scope) %></p>
-      </div>
-    <% end %>
-    <% if circle2 %>
-      <div class="column large-6 circle">
-        <%= circle2 %>
-        <p><%= t("total_goal", goal: total_goal, scope: i18n_scope) %></p>
-      </div>
-    <% end %>
+      <% if amount_progress_circle %>
+        <div class="column large-4 circle mb-m">
+          <%= amount_progress_circle %>
+          <p><%= t("amount_goal", goal: "#{amount_to_currency(amount_goal)}", scope: i18n_scope) %></p>
+        </div>
+      <% end %>
+      <% if count_progress_circle %>
+        <div class="column large-4 circle mb-m">
+          <%= count_progress_circle %>
+          <p><%= t("total_goal", goal: total_goal, scope: i18n_scope) %></p>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
 
 <%= stylesheet_link_tag "decidim/donations/circle" %>
+<%= stylesheet_link_tag "decidim/donations/content_block" %>
 <%= javascript_include_tag "decidim/donations/animate_number" %>
 
 <script>

@@ -59,6 +59,14 @@ module Decidim
           </div>"
         end
 
+        def amount_progress_circle
+          circle(percent(total_donations_amount, amount_goal))
+        end
+        
+        def count_progress_circle
+          circle(percent(total_donations_successful, total_goal))
+        end
+
         def decidim_donations
           Decidim::Donations::Verification::Engine.routes.url_helpers
         end

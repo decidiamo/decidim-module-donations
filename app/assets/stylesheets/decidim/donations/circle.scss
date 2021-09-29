@@ -5,17 +5,15 @@ $circle-width: 0.09em;
 $circle-width-hover: 0.07em;
 
 // colors default
-$primary-color: #000000; // czarny
-$secondary-color: #dfe8ed; //szary bcg
-$bg-color: #ffffff; //srodkowy bezowy 
+$primary-color: #000000;
+$secondary-color: #ffffff;
+$bg-color: #b5b5b5;
 
 // colors customized
 $primary-color-blue: #30bae7;
 $primary-color-green: #15c7a8;
 $primary-color-orange: #eb7d4b; 
 $primary-color-pink: #d74680; 
-$primary-color-span: #3c4761;
-
 
 .circle {
 	>p {
@@ -57,7 +55,7 @@ $primary-color-span: #3c4761;
 	border-radius: 50%;
 	float: left;
 	margin: 0.1em;
-	background-color: $secondary-color;
+	background-color: $bg-color;
 
 // 	// center circle to its parent
 	&.center{
@@ -79,7 +77,6 @@ $primary-color-span: #3c4761;
 		width: 5em;
 		line-height: 5em;
 		font-size: 0.2em;
-		color: $primary-color-span;
 		display: block;
 		text-align: center;
 		white-space: nowrap;
@@ -96,7 +93,7 @@ $primary-color-span: #3c4761;
 		display: block;
 		content: " ";
 		border-radius: 50%;
-		background-color: $bg-color;
+		background-color: $secondary-color;
 		width: 1 - (2 * $circle-width);
 		height: 1 - (2 * $circle-width);
 		@include transition-property(all);
@@ -148,7 +145,6 @@ $primary-color-span: #3c4761;
 			width: 3.33em;
 			line-height: 3.33em;
 			font-size: 0.3em;
-			color: $primary-color-span;
 		}
 
 		&:after{
@@ -163,103 +159,61 @@ $primary-color-span: #3c4761;
 	// Decidim primary
 	&.primary {
 		.bar, .fill { border-color: var(--primary) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.secondary {
 		.bar, .fill { border-color: var(--secondary) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
   
 	&.success {
 		.bar, .fill { border-color: var(--success) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.warning {
 		.bar, .fill { border-color: var(--warning) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.alert {
 		.bar, .fill { border-color: var(--alert) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.highlight {
 		.bar, .fill { border-color: var(--highlight) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.proposals {
 		.bar, .fill { border-color: var(--proposals) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.actions {
 		.bar, .fill { border-color: var(--actions) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.debates {
 		.bar, .fill { border-color: var(--debates) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	&.meetings {
 		.bar, .fill { border-color: var(--meetings) !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
   
 	// blue
 	&.blue{
 		.bar, .fill { border-color: $primary-color-blue !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	// pink skin
 	&.pink{
 		.bar, .fill { border-color: $primary-color-pink !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	// green skin
 	&.green{
 		.bar, .fill { border-color: $primary-color-green !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 
 	// orange skin
 	&.orange{
 		.bar, .fill { border-color: $primary-color-orange !important;}
-		&:hover{
-			> span { color: $primary-color-span;}
-		}
 	}
 }
