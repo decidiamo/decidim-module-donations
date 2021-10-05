@@ -1,0 +1,219 @@
+@import "decidim/donations/utils";
+
+// VARS
+$circle-width: 0.09em;
+$circle-width-hover: 0.07em;
+
+// colors default
+$primary-color: #000000;
+$secondary-color: #ffffff;
+$bg-color: #b5b5b5;
+
+// colors customized
+$primary-color-blue: #30bae7;
+$primary-color-green: #15c7a8;
+$primary-color-orange: #eb7d4b; 
+$primary-color-pink: #d74680; 
+
+.circle {
+	>p {
+		text-align: center;
+	}
+}
+
+// CIRCLE
+// classes 2 extend
+.rect-auto{
+	clip: rect(auto, auto, auto, auto);
+}
+
+.pie {
+	position: absolute;
+	border: $circle-width solid $primary-color;
+	width: 1 - (2 * $circle-width);
+	height: 1 - (2 * $circle-width);
+	clip: rect(0em, 0.5em, 1em, 0em);
+	border-radius: 50%;
+	@include rotate(0deg);
+}
+
+.pie-fill {
+	@include rotate(180deg);
+}
+
+// main
+.c100 {
+
+	*, *:before, *:after {
+		@include box-sizing(content-box);
+	}
+
+	position: relative;
+	font-size: 160px;
+	width: 1em;
+	height: 1em;
+	border-radius: 50%;
+	float: left;
+	margin: 0.1em;
+	background-color: $bg-color;
+
+// 	// center circle to its parent
+	&.center{
+		float: none;
+		margin: 0 auto;
+	}
+
+	&.small{
+		font-size: 80px;
+	}
+
+	// centered value inside circle
+	> span {
+		position: absolute;
+		width: 100%;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 5em;
+		line-height: 5em;
+		font-size: 0.2em;
+		display: block;
+		text-align: center;
+		white-space: nowrap;
+		@include transition-property(all);
+		@include transition-duration(0.2s);
+		@include transition-timing-function(ease-out);
+	}
+
+	// background inside the circle
+	&:after{
+		position: absolute;
+		top: $circle-width;
+		left: $circle-width;
+		display: block;
+		content: " ";
+		border-radius: 50%;
+		background-color: $secondary-color;
+		width: 1 - (2 * $circle-width);
+		height: 1 - (2 * $circle-width);
+		@include transition-property(all);
+		@include transition-duration(0.2s);
+		@include transition-timing-function(ease-in);
+	}
+
+	// the slice (mask)
+	.slice {
+		position: absolute;
+		width: 1em;
+		height: 1em;
+		clip: rect(0em, 1em, 1em, 0.5em);
+	}
+
+	// circle to show the status
+	.bar {
+		@extend .pie;
+	}
+
+	// loop to create all needed elements automatically
+	@for $j from 51 through 100 {
+		&.p#{$j} .slice {
+			@extend .rect-auto;
+		}
+
+		&.p#{$j} .bar:after{
+			@extend .pie-fill;
+		}
+
+		&.p#{$j} .fill{
+			@extend .pie;
+			@extend .pie-fill;
+		}
+	}
+
+	// loop to rotate all 100 circles
+	@for $j from 1 through 100 {
+		&.p#{$j} .bar {
+			@include rotate((360/100*$j) + deg);
+		}
+	}
+
+	// hover styles
+	&:hover{
+		cursor: default;
+
+		> span {
+			width: 3.33em;
+			line-height: 3.33em;
+			font-size: 0.3em;
+		}
+
+		&:after{
+			top: $circle-width-hover;
+			left: $circle-width-hover;
+			width: 1 - (2 * $circle-width-hover);
+			height: 1 - (2 * $circle-width-hover);
+		}
+
+	}
+
+	// Decidim primary
+	&.primary {
+		.bar, .fill { border-color: var(--primary) !important;}
+	}
+
+	&.secondary {
+		.bar, .fill { border-color: var(--secondary) !important;}
+	}
+  
+	&.success {
+		.bar, .fill { border-color: var(--success) !important;}
+	}
+
+	&.warning {
+		.bar, .fill { border-color: var(--warning) !important;}
+	}
+
+	&.alert {
+		.bar, .fill { border-color: var(--alert) !important;}
+	}
+
+	&.highlight {
+		.bar, .fill { border-color: var(--highlight) !important;}
+	}
+
+	&.proposals {
+		.bar, .fill { border-color: var(--proposals) !important;}
+	}
+
+	&.actions {
+		.bar, .fill { border-color: var(--actions) !important;}
+	}
+
+	&.debates {
+		.bar, .fill { border-color: var(--debates) !important;}
+	}
+
+	&.meetings {
+		.bar, .fill { border-color: var(--meetings) !important;}
+	}
+  
+	// blue
+	&.blue{
+		.bar, .fill { border-color: $primary-color-blue !important;}
+	}
+
+	// pink skin
+	&.pink{
+		.bar, .fill { border-color: $primary-color-pink !important;}
+	}
+
+	// green skin
+	&.green{
+		.bar, .fill { border-color: $primary-color-green !important;}
+	}
+
+	// orange skin
+	&.orange{
+		.bar, .fill { border-color: $primary-color-orange !important;}
+	}
+}

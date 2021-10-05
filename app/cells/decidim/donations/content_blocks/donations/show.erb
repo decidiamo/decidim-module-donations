@@ -1,0 +1,40 @@
+<section class="wrapper-home home-section">
+  <div class="row" id="donations-summary">
+    <h3 class="section-heading"><%= t("title", scope: i18n_scope) %></h3>
+    <div class="row">
+      <div class="column large-4 mb-m">
+        <h3><%= collected_text %></h3>
+        <%= link_to t("new", scope: i18n_scope), decidim_donations.root_path, class: "button expanded large mt-m" %>
+      </div>
+      <% if amount_progress_circle %>
+        <div class="column large-4 circle mb-m">
+          <%= amount_progress_circle %>
+          <p><%= t("amount_goal", goal: "#{amount_to_currency(amount_goal)}", scope: i18n_scope) %></p>
+        </div>
+      <% end %>
+      <% if count_progress_circle %>
+        <div class="column large-4 circle mb-m">
+          <%= count_progress_circle %>
+          <p><%= t("total_goal", goal: total_goal, scope: i18n_scope) %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= stylesheet_link_tag "decidim/donations/circle" %>
+<%= stylesheet_link_tag "decidim/donations/content_block" %>
+<%= javascript_include_tag "decidim/donations/animate_number" %>
+
+<script>
+
+$(function(){
+  // Animate numbers
+  $('.animate-number').animateNumber({
+    decimal: '<%= t("number.currency.format.separator") %>',
+    thousand: '<%= t("number.currency.format.delimiter") %>',
+    steps: 30
+  });
+});
+
+</script>

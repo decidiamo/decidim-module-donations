@@ -1,0 +1,5 @@
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <%= settings_fields.text_field :amount_goal, type: :number, label: t("amount_goal", scope: i18n_scope) %>
+  <%= settings_fields.text_field :total_goal, type: :number, label: t("total_goal", scope: i18n_scope) %>
+  <%= settings_fields.date_field :start_date, label: t("start_date", scope: i18n_scope) %>
+<% end %>

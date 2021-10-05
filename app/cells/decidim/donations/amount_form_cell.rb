@@ -4,10 +4,7 @@ module Decidim
   module Donations
     class AmountFormCell < Decidim::ViewModel
       include PaymentGateway
-
-      def form
-        model
-      end
+      alias form model
 
       def minimum_amount
         form.context&.minimum_amount || Donations.config.minimum_amount
