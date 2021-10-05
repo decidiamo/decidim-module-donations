@@ -26,6 +26,19 @@ es:
         error: 'El pago no pudo ser procesado: %{message}'
         success: Pago procesado con éxito. ¡Muchas gracias por tu contribución!
         title: "Donación de %{name}"
+      content_blocks:
+        donations:
+          amount_goal: Help us reach <strong>%{goal}</strong>!
+          collected_since: "%{amount} have been raised since %{date} in %{total} donations!"
+          collected_so_far: "%{amount} have been raised so far with %{total} donations!"
+          name: Donations
+          new: "\U0001F31F Make a new donation"
+          title: Donations
+          total_goal: Will you be one of the <strong>%{goal}</strong> donors we need?
+        donations_settings_form:
+          amount_goal: Amount goal (leave it to zero to hide the progress)
+          start_date: Count donations since (leave it empty to count everything)
+          total_goal: Number of donations goal (leave it to zero to hide the progress)
       formated_amount: "%{amount}€"
       providers:
         paypal_express: PayPal
