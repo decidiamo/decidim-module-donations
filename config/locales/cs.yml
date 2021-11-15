@@ -28,8 +28,8 @@ cs:
         title: "Dar od %{name}"
       content_blocks:
         donations:
-          amount_goal: Help us reach <strong>%{goal}</strong>!
-          collected_since: "%{amount} have been raised since %{date} in %{total} donations!"
+          amount_goal: Pomoz nám dosáhnout <strong>%{goal}</strong>!
+          collected_since: "%{amount} bylo získáno od %{date} v %{total} darech!"
           collected_so_far: "%{amount} have been raised so far with %{total} donations!"
           name: Donations
           new: "\U0001F31F Make a new donation"
