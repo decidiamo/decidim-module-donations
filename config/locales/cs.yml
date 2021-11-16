@@ -30,15 +30,15 @@ cs:
         donations:
           amount_goal: Pomoz nám dosáhnout <strong>%{goal}</strong>!
           collected_since: "%{amount} bylo získáno od %{date} v %{total} darech!"
-          collected_so_far: "%{amount} have been raised so far with %{total} donations!"
-          name: Donations
-          new: "\U0001F31F Make a new donation"
-          title: Donations
-          total_goal: Will you be one of the <strong>%{goal}</strong> donors we need?
+          collected_so_far: "%{amount} bylo dosud získáno %{total} příspěvky!"
+          name: Dary
+          new: "\U0001F31F Darujte"
+          title: Dary
+          total_goal: Budete jedním z <strong>%{goal}</strong> dárců, které potřebujeme?
         donations_settings_form:
-          amount_goal: Amount goal (leave it to zero to hide the progress)
-          start_date: Count donations since (leave it empty to count everything)
-          total_goal: Number of donations goal (leave it to zero to hide the progress)
+          amount_goal: Cíl množství (nechte na nule pro skrytí aktuálního stavu)
+          start_date: Počítat dary od (nechte prázdné pro počítání vše)
+          total_goal: Počet darů (nechte na nule pro skrytí průběhu)
       formated_amount: "%{amount}€"
       providers:
         paypal_express: PayPal
