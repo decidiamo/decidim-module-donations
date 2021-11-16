@@ -17,11 +17,28 @@ ca:
           transaction_id: ID de la Transacció
         name: Donacions
     donations:
+      amount_form:
+        checkout: Dona amb %{provider}
+        description: Es requereix una quantitat mínima de %{minimum_amount} per completar l'autorització. <br>ot i que la quantitat suggerida és de %{default_amount}, podeu canviar-la si voleu.
       checkout:
+        amount_errors: La quantitat és incorrecte
         description: Una contribució per a %{organization}
         error: 'El pagament no s''ha pogut processar: %{message}'
-        success: Pagament processat correctament!
+        success: El pagament s'ha processat correctament. Moltes gràcies per la teva contribució!
         title: "La donació de %{name}"
+      content_blocks:
+        donations:
+          amount_goal: Help us reach <strong>%{goal}</strong>!
+          collected_since: "%{amount} have been raised since %{date} in %{total} donations!"
+          collected_so_far: "%{amount} have been raised so far with %{total} donations!"
+          name: Donations
+          new: "\U0001F31F Make a new donation"
+          title: Donations
+          total_goal: Will you be one of the <strong>%{goal}</strong> donors we need?
+        donations_settings_form:
+          amount_goal: Amount goal (leave it to zero to hide the progress)
+          start_date: Count donations since (leave it empty to count everything)
+          total_goal: Number of donations goal (leave it to zero to hide the progress)
       formated_amount: "%{amount}€"
       providers:
         paypal_express: PayPal
@@ -29,6 +46,12 @@ ca:
         <h5>En enviar aquest formulari accepteu els Termes i Condicions següents:</h5>
 
         <p>Aquesta contribució és una donació i no és reemborsable.</p>
+      user_donations:
+        new:
+          title: Fes una nova donació
+        show:
+          new_donation: "\U0001F31F Nova donació"
+          title: Les meves donacions
       user_profile:
         menu:
           title: Les meves donacions
@@ -53,8 +76,6 @@ ca:
             error: S'ha produït un error en crear l'autorització
             success: Gràcies per la teva donació! Ja estàs correctament verificat!
           new:
-            checkout: Dona amb %{provider}
-            description: Es requereix una quantitat mínima de %{minimum_amount} per completar l'autorització. Tot i que quantitat suggerida és de %{default_amount} podeu canviar-la si voleu.
             instructions: Per completar el procés d’autorització cal fer una donació.
             title: Fes la teva aportació
         statuses:
@@ -62,6 +83,3 @@ ca:
           none: Cap
           pending: Si, pendent
           valid: Si, vàlida
-        user_donations:
-          show:
-            title: Les meves donacions

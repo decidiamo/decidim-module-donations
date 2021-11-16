@@ -17,11 +17,28 @@ cs:
           transaction_id: ID Transakce
         name: Dary
     donations:
+      amount_form:
+        checkout: Přispějte pomocí %{provider}
+        description: Pro dokončení autorizace je vyžadováno minimální částka %{minimum_amount}.<br>Navržená částka je %{default_amount}, ale můžete ji změnit, pokud chcete.
       checkout:
+        amount_errors: Neplatná částka
         description: Příspěvek pro %{organization}
         error: 'Platbu nelze provést: %{message}'
-        success: Platba byla úspěšně zpracována!
+        success: Platba byla úspěšně zpracována. Váš příspěvek velmi oceňujeme!
         title: "Dar od %{name}"
+      content_blocks:
+        donations:
+          amount_goal: Pomoz nám dosáhnout <strong>%{goal}</strong>!
+          collected_since: "%{amount} bylo získáno od %{date} v %{total} darech!"
+          collected_so_far: "%{amount} bylo dosud získáno %{total} příspěvky!"
+          name: Dary
+          new: "\U0001F31F Darujte"
+          title: Dary
+          total_goal: Budete jedním z <strong>%{goal}</strong> dárců, které potřebujeme?
+        donations_settings_form:
+          amount_goal: Cíl množství (nechte na nule pro skrytí aktuálního stavu)
+          start_date: Počítat dary od (nechte prázdné pro počítání vše)
+          total_goal: Počet darů (nechte na nule pro skrytí průběhu)
       formated_amount: "%{amount}€"
       providers:
         paypal_express: PayPal
@@ -29,6 +46,12 @@ cs:
         <h5>Odesláním tohoto formuláře souhlasíte s následujícími obchodními podmínkami:</h5>
 
         <p>Tento příspěvek je darem a není vratný.</p>
+      user_donations:
+        new:
+          title: Darujte
+        show:
+          new_donation: "\U0001F31F Nový příspěvek"
+          title: Moje dary
       user_profile:
         menu:
           title: Moje dary
@@ -53,8 +76,6 @@ cs:
             error: Došlo k chybě při vytváření autorizace
             success: Děkujeme za váš příspěvek! Byl jste úspěšně ověřen!
           new:
-            checkout: Přispějte pomocí %{provider}
-            description: Pro dokončení autorizace je vyžadována minimální částka %{minimum_amount}. Navrhovaná částka je %{default_amount}, ale pokud chcete, můžete ji změnit.
             instructions: Pro dokončení autorizačního procesu je třeba darovat.
             title: Přispějte
         statuses:
@@ -62,6 +83,3 @@ cs:
           none: Žádný
           pending: Ano, čeká
           valid: Ano, platný
-        user_donations:
-          show:
-            title: Moje dary
