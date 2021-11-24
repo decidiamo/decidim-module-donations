@@ -16,6 +16,9 @@ module Decidim
 
       def new
         enforce_permission_to :read, :user, current_user: current_user
+
+        return redirect_to decidim_donations.root_path if authorization.blank?
+
         @form = checkout_form
       end
 
@@ -78,6 +81,13 @@ module Decidim
                                        process_path: decidim_user_donations.user_donations_path,
                                        title: I18n.t("checkout.title", name: current_user.name, scope: "decidim.donations"),
                                        description: I18n.t("checkout.description", organization: current_organization.name, scope: "decidim.donations"))
+      end
+
+      def authorization
+        @authorization ||= Decidim::Authorization.find_by(
+          user: current_user,
+          name: "donations"
+        )
       end
     end
   end
