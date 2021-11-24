@@ -107,5 +107,31 @@ module Decidim::Donations::Verification
 
       expect(controller.helpers.amount_to_currency(12_304)).to eq("€12,304.00")
     end
+
+    context "when authorizing someone" do
+      let!(:donation) { create(:donation, amount: 12_300, user: another_user, authorization_unique_id: unique_id) }
+      let(:unique_id) { "unique-id" }
+
+      it "creates a new authorization" do
+        post :create, params: { donation_id: donation.id }
+
+        expect(controller.flash[:notice]).to include("successfully authorized")
+        expect(controller.flash[:alert]).to be_nil
+        expect(donation.reload.authorization).to be_present
+        expect(response).to redirect_to("/admin/donations/donations")
+      end
+
+      context "and authorization exists" do
+        let!(:authorization) { create(:authorization, :pending, name: "donations", unique_id: unique_id, user: another_user) }
+
+        it "do not create a new authorization" do
+          post :create, params: { donation_id: donation.id }
+
+          expect(controller.flash[:notice]).to be_nil
+          expect(controller.flash[:alert]).to include("Authorization already exists for this donation")
+          expect(response).to redirect_to("/admin/donations/donations")
+        end
+      end
+    end
   end
 end

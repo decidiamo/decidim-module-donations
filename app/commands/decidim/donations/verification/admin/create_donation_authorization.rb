@@ -11,7 +11,7 @@ module Decidim
 
           def call
             return broadcast(:invalid, error) unless successful_donation?
-            return broadcast(:invalid, error) unless already_authorized_donation?
+            return broadcast(:invalid, error) unless donation_without_authorization?
 
             create_authorization!
             donation.update!(authorization_unique_id: authorization.unique_id)
@@ -50,7 +50,7 @@ module Decidim
             false
           end
 
-          def already_authorized_donation?
+          def donation_without_authorization?
             return true if donation.authorization_status == :none
 
             @error = I18n.t("verification.already_authorized", scope: "decidim.donations.verification.admin.donations")
