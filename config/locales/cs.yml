@@ -57,6 +57,8 @@ cs:
           title: Moje dary
       verification:
         admin:
+          actions:
+            authorize: Authorize this user with this payment
           donations:
             amount: Částka
             authorization: Autorizace
@@ -68,9 +70,15 @@ cs:
             name: Uživatel
             reference: Reference
             success: OK?
+            sure_to_authorize: This will remove any existing Donation authorization from this user and create a new one linked to this payment. Do you want to continue?
             total_donations: Celkem příkazů
             total_donations_amount: Celková částka
             total_donations_successful: Úspěšné platby
+            verification:
+              already_authorized: Authorization already exists for this donation
+              error: There's been an error trying while authorizing this user. %{message}
+              payment_invalid: Payment invalid
+              success: User %{user} successfully authorized using donation %{donation}
         authorizations:
           create:
             error: Došlo k chybě při vytváření autorizace
