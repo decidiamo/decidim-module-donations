@@ -31,6 +31,7 @@
             <td><%= l donation.created_at, format: :decidim_short %></td>
             <td class="authorization-status"><%= t("#{donation.authorization_status}", scope: "decidim.donations.verification.statuses") %></td>
             <td class="table-list__actions">
+              <%= icon_link_to "key", decidim_admin_donations.donations_path(donation_id: donation.id), t("actions.authorize", scope: "decidim.donations.verification.admin"), class: "action-icon--edit", data: { confirm: t("sure_to_authorize", scope: "decidim.donations.verification.admin.donations") }, method: :post if donation.success? && donation.authorization_status == :none %>
             </td>
           </tr>
         <% end %>

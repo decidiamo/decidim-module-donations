@@ -12,7 +12,7 @@ end
 
 Decidim::Donations.credentials do
   config.minimum_amount = 1
-  config.verficiation_amount = 5 # if this config is omitted, defaults to minimum_amount
+  config.verificiation_amount = 5 # if this config is omitted, defaults to minimum_amount
   config.default_amount = 10
 
   config.provider = :paypal_express # currently only this one is supported

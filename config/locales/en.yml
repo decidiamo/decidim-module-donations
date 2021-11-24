@@ -75,6 +75,14 @@ en:
             total_donations: Total orders
             total_donations_amount: Total amount
             total_donations_successful: Successful payments
+            sure_to_authorize: This will remove any existing Donation authorization from this user and create a new one linked to this payment. Do you want to continue?
+            verification:
+              success: User %{user} successfully authorized using donation %{donation}
+              error: There's been an error trying while authorizing this user. %{message}
+              payment_invalid: Payment invalid
+              already_authorized: Authorization already exists for this donation
+          actions:
+            authorize: Authorize this user with this payment
         authorizations:
           create:
             error: There's been an error creating the authorization
