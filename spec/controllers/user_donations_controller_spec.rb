@@ -88,27 +88,49 @@ module Decidim::Donations
     end
 
     context "when making a new donation" do
-      it "renders new template" do
-        get :new
-
-        expect(subject).to render_template(:new)
-      end
-
-      it "changes the amount in helpers and verification_amount is ignored" do
-        get :new
-
-        expect(Decidim::Donations.verification_amount).to eq(verification_amount)
-        expect(controller.send(:checkout_form).minimum_amount).to eq(minimum_amount)
-      end
-
-      context "when no verification amount specified" do
-        let(:verification_amount) { nil }
-
-        it "renders theo minimum_amount" do
+      context "and user is not authorized" do
+        it "redirects to donation" do
           get :new
 
-          expect(Decidim::Donations.verification_amount).to eq(Decidim::Donations.minimum_amount)
+          expect(subject).to redirect_to("/donations/")
+        end
+
+        context "and authorization is not active" do
+          let(:organization) { create(:organization) }
+
+          it "renders new template" do
+            get :new
+
+            expect(subject).to render_template(:new)
+          end
+        end
+      end
+
+      context "and user is already authorized" do
+        let!(:authorization) { create(:authorization, :granted, user: user, name: "donations") }
+
+        it "renders new template" do
+          get :new
+
+          expect(subject).to render_template(:new)
+        end
+
+        it "changes the amount in helpers and verification_amount is ignored" do
+          get :new
+
+          expect(Decidim::Donations.verification_amount).to eq(verification_amount)
           expect(controller.send(:checkout_form).minimum_amount).to eq(minimum_amount)
+        end
+
+        context "when no verification amount specified" do
+          let(:verification_amount) { nil }
+
+          it "renders theo minimum_amount" do
+            get :new
+
+            expect(Decidim::Donations.verification_amount).to eq(Decidim::Donations.minimum_amount)
+            expect(controller.send(:checkout_form).minimum_amount).to eq(minimum_amount)
+          end
         end
       end
     end
