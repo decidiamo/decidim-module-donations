@@ -1,4 +1,3 @@
----
 it:
   activemodel:
     attributes:
@@ -9,9 +8,8 @@ it:
       admin:
         donations:
           help:
-          - Per essere verificati, gli utenti devono pagare un importo minimo
-          - Attualmente solo PayPal Express è supportato (ulteriori metodi di pagamento
-            in futuro)
+            - Per essere verificati, gli utenti devono pagare un importo minimo
+            - Attualmente solo PayPal Express è supportato (ulteriori metodi di pagamento in futuro)
       donations:
         explanation: Ottieni la verifica apportando un contributo monetario all'organizzazione
         fields:
@@ -20,31 +18,27 @@ it:
         name: Donazioni
     donations:
       amount_form:
-        checkout: Dona con %{provider}
-        description: È necessario un minimo di %{minimum_amount} per completare l'autorizzazione.<br>
-          L'importo suggerito è %{default_amount} ma puoi cambiarlo se vuoi.
+        checkout: Donate with %{provider}
+        description: A minimum amount of %{minimum_amount} is required in order to complete the authorization.<br>The amount suggested is %{default_amount} but you can change it if you want.
       checkout:
-        amount_errors: L'importo è sbagliato
+        amount_errors: The amount is incorrect
         description: Un contributo per %{organization}
         error: 'Non è stato possibile elaborare il pagamento: %{message}'
-        success: Il pagamento è stato processato correttamente. Grazie per il tuo
-          contributo.
-        title: Donazione di %{name}
+        success: Payment processed successfully. You contribution is greatly appreciated!
+        title: "Donazione di %{name}"
       content_blocks:
         donations:
-          amount_goal: Aiutaci a raggiungere <strong>%{goal}</strong>!
+          amount_goal: Help us reach <strong>%{goal}</strong>!
           collected_since: "%{amount} have been raised since %{date} in %{total} donations!"
           collected_so_far: "%{amount} have been raised so far with %{total} donations!"
-          name: Donazioni
-          new: "\U0001F31F Nuova donazione"
-          title: Donazioni
-          total_goal: Sarai uno dei <strong>%{goal}</strong> donatori di cui abbiamo
-            bisogno?
+          name: Donations
+          new: "\U0001F31F Make a new donation"
+          title: Donations
+          total_goal: Will you be one of the <strong>%{goal}</strong> donors we need?
         donations_settings_form:
-          amount_goal: Obiettivo (lascialo a zero per nascondere il progressivo)
-          start_date: Totale donazioni dal(lascia vuoto per conteggiare tutto)
-          total_goal: Numero di donazioni per raggiugnere l'obiettivo(lascialo a zero
-            per nascodere il progressivo)
+          amount_goal: Amount goal (leave it to zero to hide the progress)
+          start_date: Count donations since (leave it empty to count everything)
+          total_goal: Number of donations goal (leave it to zero to hide the progress)
       formated_amount: "%{amount}€"
       providers:
         paypal_express: PayPal
@@ -54,17 +48,17 @@ it:
         <p>Questo contributo è una donazione e non è rimborsabile.</p>
       user_donations:
         new:
-          title: Fai una nuova donazione
+          title: Make a new donation
         show:
-          new_donation: "\U0001F31F Nuova donazione"
-          title: Le mie donazioni
+          new_donation: "\U0001F31F New donation"
+          title: My donations
       user_profile:
         menu:
           title: Le mie donazioni
       verification:
         admin:
           actions:
-            authorize: Autorizza questo utente con questo pagamento
+            authorize: Authorize this user with this payment
           donations:
             amount: Importo
             authorization: Autorizzazione
@@ -76,25 +70,21 @@ it:
             name: Partecipante
             reference: Riferimento
             success: OK?
-            sure_to_authorize: Questo rimuoverà l'autorizzazione di donazione da questo
-              utente e ne crea una nuova correllata al pagamento. Vuoi continuare?
+            sure_to_authorize: This will remove any existing Donation authorization from this user and create a new one linked to this payment. Do you want to continue?
             total_donations: Totale donazioni
             total_donations_amount: Importo complessivo
             total_donations_successful: Donazioni con successo
             verification:
-              already_authorized: L'autorizzazione esiste già per questa donazione
-              error: C'è stato un errore durante l'autorizzazione di questo utente.
-                %{message}
-              payment_invalid: Pagamento non valido
-              success: L'utente %{user} è stato autorizzato tramite la donazione di
-                %{donation}
+              already_authorized: Authorization already exists for this donation
+              error: There's been an error trying while authorizing this user. %{message}
+              payment_invalid: Payment invalid
+              success: User %{user} successfully authorized using donation %{donation}
         authorizations:
           create:
             error: Si è verificato un errore durante la creazione dell'autorizzazione
             success: Grazie per la tua donazione! Sei stato verificato con successo!
           new:
-            instructions: Per completare il processo di verifica è necessario effettuare
-              una donazione.
+            instructions: Per completare il processo di verifica è necessario effettuare una donazione.
             title: Effettua una donazione
         statuses:
           expired: Sì, scaduto
