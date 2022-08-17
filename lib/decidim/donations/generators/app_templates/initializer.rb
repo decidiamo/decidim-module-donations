@@ -17,8 +17,8 @@ Decidim::Donations.configure do |config|
 
   config.provider = :paypal_express # currently only this one is supported
   config.credentials = {
-    login: Rails.application.secrets.donations[:login],
-    password: Rails.application.secrets.donations[:password],
-    signature: Rails.application.secrets.donations[:signature]
+    login: Rails.application.secrets.donations&.login,
+    password: Rails.application.secrets.donations&.password,
+    signature: Rails.application.secrets.donations&.signature
   }
 end
