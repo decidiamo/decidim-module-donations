@@ -10,7 +10,7 @@ Decidim::Verifications.register_workflow(:donations) do |workflow|
   # workflow.time_between_renewals = 1.month
 end
 
-Decidim::Donations.credentials do
+Decidim::Donations.configure do |config|
   config.minimum_amount = 1
   config.verification_amount = 5 # if this config is omitted, defaults to minimum_amount
   config.default_amount = 10
